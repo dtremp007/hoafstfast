@@ -19,10 +19,12 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'ddrempti@gmail.com',
+            'password' => bcrypt('12345678'),
         ]);
 
-        Event::factory(10)->create();
-        Location::factory(3)->create();
+       $this->call([
+            EventSeeder::class,
+        ]);
     }
 }

@@ -63,12 +63,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::post('/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
     Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
     Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
     Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
     Route::get('/locations/{location}/edit', [LocationController::class, 'edit'])->name('locations.edit');
     Route::post('/locations/{location}', [LocationController::class, 'update'])->name('locations.update');
+    Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
 });
 
 Route::get('/attendees', function () {

@@ -74,4 +74,12 @@ class LocationController extends Controller
         return redirect()->route('locations.edit', $location)
             ->with('success', 'Location updated successfully.');
     }
+
+    public function destroy(Location $location)
+    {
+        $location->delete();
+
+        return redirect()->route('locations.index')
+            ->with('success', 'Location deleted successfully.');
+    }
 }

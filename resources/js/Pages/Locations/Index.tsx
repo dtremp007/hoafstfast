@@ -1,7 +1,5 @@
 import React from "react"
 import {Edit, File, ListFilter, MoreHorizontal, PlusCircle,} from "lucide-react"
-
-import {Badge} from "@/components/ui/badge"
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
 import {
@@ -17,6 +15,7 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import {Link} from "@inertiajs/inertia-react";
 import {type Location} from "@/types/location";
+import {router} from "@inertiajs/react";
 
 const Index = ({locations}: {
     locations: Location[]
@@ -51,10 +50,10 @@ const Index = ({locations}: {
                     </span>
                     </Button>
                     <Button asChild size="sm" className="h-8 gap-1">
-                        <Link href={route('events.create')}>
+                        <Link href={route('locations.create')}>
                             <PlusCircle className="h-3.5 w-3.5"/>
                             <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Add Event
+                      Add Location
                     </span>
                         </Link>
                     </Button>
@@ -104,7 +103,13 @@ const Index = ({locations}: {
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                                 <DropdownMenuItem asChild>Edit</DropdownMenuItem>
-                                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                                                <DropdownMenuItem
+                                                    onClick={() => {
+                                                        router.delete(route('locations.destroy', location.id))
+                                                    }}
+                                                >
+                                                    Delete
+                                                </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>

@@ -30,7 +30,7 @@ type DashboardLayoutProps = {
 }
 export default function DashboardLayout({children}: DashboardLayoutProps) {
     const {toast} = useToast()
-    const {flash} = usePage().props
+    const {flash, url} = usePage().props
 
     React.useEffect(() => {
         if (flash.success) {
@@ -158,7 +158,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                                     </Link>
                                     <Link
                                         href={route('dashboard')}
-                                        className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                        className="flex items-center gap-4 px-2.5 text-foreground"
                                     >
                                         <Home className="h-5 w-5"/>
                                         Dashboard

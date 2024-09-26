@@ -18,7 +18,7 @@ const MarkdownEditor = (props: MarkdownEditorProps ) => {
         editorProps: {
             attributes: {
                 class:
-                    "p-3 rounded-md border border-input bg-background prose prose-sm sm:prose-base max-w-none",
+                    "p-3 rounded-md border border-input bg-background prose dark:prose-invert prose-sm sm:prose-base max-w-none",
             },
         },
     });

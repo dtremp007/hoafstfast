@@ -3,7 +3,7 @@ import React from "react";
 import {EventCard} from "@/components/EventCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {Inertia} from "@inertiajs/inertia";
-import {usePage} from "@inertiajs/react";
+import {Head, usePage} from "@inertiajs/react";
 
 type EventScheduleProps = {
     eventsByDay: {
@@ -29,8 +29,9 @@ export default function EventSchedule({ eventsByDay }: EventScheduleProps) {
     };
 
     return (
-        <div className="max-w-md mx-auto bg-background">
-            <h1 className="text-2xl font-bold text-center py-4">Harvest Festival</h1>
+        <div className="max-w-md mx-auto bg-background p-4">
+            <Head title="Schedule" />
+            <h1 className="text-2xl font-bold text-center py-4">Hoafstfast 🌽</h1>
 
             <Tabs defaultValue={activeDay} onValueChange={handleTabChange}>
                 <TabsList className="grid w-full grid-cols-3">
