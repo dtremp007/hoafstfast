@@ -22,20 +22,21 @@ export default function EventSchedule({ eventsByDay }: EventScheduleProps) {
     //     </pre>
     // )
 
-    const [activeDay, setActiveDay] = React.useState(eventsByDay[0]?.date);
+    // choose today or the first day
+    const [activeDay, setActiveDay] = React.useState(eventsByDay[0].date);
 
     const handleTabChange = (value: string) => {
         setActiveDay(value);
     };
 
     return (
-        <div className="max-w-md mx-auto bg-background p-4">
+        <div className="max-w-md mx-auto bg-background px-3 pb-8">
             <Head title="Schedule" />
             <h1 className="text-2xl font-bold text-center py-4">Hoafstfast 🌽</h1>
 
             <Tabs defaultValue={activeDay} onValueChange={handleTabChange}>
                 <TabsList className="grid w-full grid-cols-3">
-                    {eventsByDay.map((day, index) => (
+                    {eventsByDay.slice(0,3).map((day, index) => (
                         <TabsTrigger key={day.date} value={day.date} className="text-center">
                             <div className="font-semibold">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</div>
                             <div className="text-sm ml-2">{new Date(day.date).getDate()}</div>
@@ -44,7 +45,7 @@ export default function EventSchedule({ eventsByDay }: EventScheduleProps) {
                 </TabsList>
 
                 {eventsByDay.map((day) => (
-                    <TabsContent key={day.date} value={day.date} className="space-y-4">
+                    <TabsContent key={day.date} value={day.date} className="space-y-2">
                         {day.hourBlocks.map((hourBlock) => (
                             <React.Fragment key={hourBlock.hour}>
                                 <div className="flex items-center text-muted-foreground">

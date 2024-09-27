@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::post('/events/upload', [EventController::class, 'upload'])->name('events.upload');
+    Route::get('/events/export', [EventController::class, 'export'])->name('events.export');
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::post('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');

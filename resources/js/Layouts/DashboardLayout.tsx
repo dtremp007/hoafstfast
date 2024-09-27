@@ -158,14 +158,14 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                                     </Link>
                                     <Link
                                         href={route('dashboard')}
-                                        className="flex items-center gap-4 px-2.5 text-foreground"
+                                        className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                     >
                                         <Home className="h-5 w-5"/>
                                         Dashboard
                                     </Link>
                                     <Link
                                         href={route('events.index')}
-                                        className="flex items-center gap-4 px-2.5 text-foreground"
+                                        className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                     >
                                         <Calendar className="h-5 w-5"/>
                                         Events

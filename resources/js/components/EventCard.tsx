@@ -17,7 +17,7 @@ export function EventCard({event}: { event: Event }) {
                 </div>
             </div>
             <div className="flex items-center pr-2">
-                <ChevronRight className="w-5 h-5 text-muted-foreground"/>
+                {/*<ChevronRight className="w-5 h-5 text-muted-foreground"/>*/}
             </div>
         </div>)
 }

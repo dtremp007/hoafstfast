@@ -1,5 +1,5 @@
 import React from "react"
-import {Edit, File, ListFilter, MoreHorizontal, PlusCircle,} from "lucide-react"
+import {Download, Edit, File, ListFilter, MoreHorizontal, PlusCircle,} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
 import {
@@ -20,6 +20,7 @@ import {router} from "@inertiajs/react";
 const Index = ({events}: {
     events: Event[]
 }) => {
+
     return (
         <>
             <div className="flex items-center">
@@ -43,11 +44,36 @@ const Index = ({events}: {
                             <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button size="sm" variant="outline" className="h-8 gap-1">
+                    <Button size="sm" variant="outline" className="h-8 gap-1"
+                            onClick={(e) => {
+                                const input = document.createElement('input');
+                                input.type = 'file';
+                                input.accept = '.csv';
+                                input.onchange = (e) => {
+                                    const file = (e.target as HTMLInputElement).files?.[0];
+                                    if (file) {
+                                        const formData = new FormData();
+                                        formData.append('file', file);
+                                        router.post(route('events.upload'), formData, {
+                                            forceFormData: this,
+                                        });
+                                    }
+                                };
+                                input.click();
+                            }}
+                    >
                         <File className="h-3.5 w-3.5"/>
                         <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Export
+                      Import
                     </span>
+                    </Button>
+                    <Button size="sm" variant="outline" className="h-8 gap-1" asChild>
+                        <a href={route('events.export')}>
+                            <Download className="h-3.5 w-3.5"/>
+                            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                                Export
+                            </span>
+                        </a>
                     </Button>
                     <Button asChild size="sm" className="h-8 gap-1">
                         <Link href={route('events.create')}>
@@ -145,7 +171,7 @@ const Index = ({events}: {
             </Card>
         </>
     )
-}
+};
 
 Index.layout = (page: React.ReactNode) => <DashboardLayout>{page}</DashboardLayout>
 
