@@ -36,10 +36,10 @@ const EventSchedule = ({ eventsByDay }: EventScheduleProps) => {
                 <title>Schedule</title>
                 <meta name="description" content="Hoafstfast is an annual harvest festival by Manitoba Colony community." />
             </Head>
-            <h1 className="text-2xl font-bold text-center py-4">Hoafstfast 🌽</h1>
+            <h1 className="text-2xl font-bold text-center py-3 sticky top-0 bg-background">Hoafstfast 🌽</h1>
 
             <Tabs defaultValue={activeDay} onValueChange={handleTabChange}>
-                <TabsList className="grid w-[calc(100%-8px)] mx-auto grid-cols-3 px-3 py-2 sticky top-0 h-full shadow">
+                <TabsList className="grid w-[calc(100%-8px)] mx-auto grid-cols-3 px-3 py-2 sticky top-14 h-full shadow">
                     {eventsByDay.slice(0,3).map((day, index) => (
                         <TabsTrigger key={day.date} value={day.date} className="text-center">
                             <div className="font-semibold">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</div>
