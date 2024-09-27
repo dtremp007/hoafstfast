@@ -97,9 +97,6 @@ const Index = ({events}: {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="hidden w-[100px] sm:table-cell">
-                                    <span className="sr-only">Image</span>
-                                </TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>Location</TableHead>
                                 <TableHead className="hidden md:table-cell">
@@ -113,21 +110,14 @@ const Index = ({events}: {
                         <TableBody>
                             {events.map((event) => (
                                 <TableRow key={event.id}>
-                                    <TableCell>
-                                        <img
-                                            src={(event.media || [])[0]?.original_url || 'https://via.placeholder.com/150'}
-                                            alt=""
-                                            className="w-12 h-12 rounded-lg object-cover"
-                                        />
-                                    </TableCell>
                                     <TableCell className="font-medium">
                                         {event.name}
                                     </TableCell>
-                                    <TableCell>{event.location_id}</TableCell>
+                                    <TableCell>{event.location}</TableCell>
                                     <TableCell className="hidden md:table-cell">
                                         {new Date(event.day).toLocaleDateString('en-US', {weekday: 'long'})} {event.time}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="flex">
                                         <Button asChild size="icon" variant="ghost">
                                             <Link href={route('events.edit', event.id)}>
                                                 <Edit className="h-4 w-4"/>

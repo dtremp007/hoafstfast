@@ -17,10 +17,21 @@ class EventController extends Controller
         $events = Event::with('location:id,name')
             ->orderBy('day')
             ->orderBy('time')
-            ->get();
+            ->get()
+            ->map(function ($event) {
+                return [
+                    'id' => $event->id,
+                    'name' => $event->name,
+                    'description' => $event->description,
+                    'day' => $event->day,
+                    'time' => $event->time,
+                    'duration' => $event->duration,
+                    'location' => $event->location->name,
+                ];
+            });
 
         return Inertia::render('Events/Index', [
-            'events' => $events->load('media'),
+            'events' => $events,
         ]);
     }
 

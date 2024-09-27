@@ -31,12 +31,15 @@ const EventSchedule = ({ eventsByDay }: EventScheduleProps) => {
     };
 
     return (
-        <div className="max-w-md mx-auto w-full bg-background px-3 pb-8">
-            <Head title="Schedule" />
+        <div className="max-w-md mx-auto w-full bg-background">
+            <Head >
+                <title>Schedule</title>
+                <meta name="description" content="Hoafstfast is an annual harvest festival by Manitoba Colony community." />
+            </Head>
             <h1 className="text-2xl font-bold text-center py-4">Hoafstfast 🌽</h1>
 
             <Tabs defaultValue={activeDay} onValueChange={handleTabChange}>
-                <TabsList className="grid w-full grid-cols-3">
+                <TabsList className="grid w-[calc(100%-8px)] mx-auto grid-cols-3 px-3 py-2 sticky top-0 h-full shadow">
                     {eventsByDay.slice(0,3).map((day, index) => (
                         <TabsTrigger key={day.date} value={day.date} className="text-center">
                             <div className="font-semibold">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' })}</div>
@@ -46,7 +49,7 @@ const EventSchedule = ({ eventsByDay }: EventScheduleProps) => {
                 </TabsList>
 
                 {eventsByDay.map((day) => (
-                    <TabsContent key={day.date} value={day.date} className="space-y-2">
+                    <TabsContent key={day.date} value={day.date} className="space-y-2 px-3 pb-10">
                         {day.hourBlocks.map((hourBlock) => (
                             <React.Fragment key={hourBlock.hour}>
                                 <div className="flex items-center text-muted-foreground">

@@ -1,6 +1,17 @@
 import React from "react"
 import {Link} from "@inertiajs/inertia-react"
-import {Calendar, Home, LineChart, MapPin, PanelLeft, Search, Settings, Users2,} from "lucide-react"
+import {
+    Calendar,
+    Home,
+    LineChart,
+    MapPin,
+    PanelLeft,
+    PersonStanding,
+    Search,
+    Settings,
+    UserRound,
+    Users2,
+} from "lucide-react"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -232,13 +243,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                                     size="icon"
                                     className="overflow-hidden rounded-full"
                                 >
-                                    <img
-                                        src="https://randomuser.me/api/portraits"
-                                        width={36}
-                                        height={36}
-                                        alt="User avatar"
-                                        className="overflow-hidden rounded-full"
-                                    />
+                                    <UserRound className="h-8 w-8"/>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
