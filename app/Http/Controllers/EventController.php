@@ -72,24 +72,6 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(Request $request, Event $event)
-    {
-        $validated = $this->validateEvent($request);
-
-        $eventData = array_diff_key($validated, array_flip(['image']));
-        $event->update($eventData);
-
-        if ($request->hasFile('image')) {
-            $event->clearMediaCollection();
-            $event->addMediaFromRequest('image')->toMediaCollection();
-        } elseif ($request->boolean('delete_image')) {
-            $event->clearMediaCollection('event_image');
-        }
-
-        return redirect()->route('events.edit', $event)
-            ->with('success', 'Event updated successfully.');
-    }
-
     public function destroy(Event $event)
     {
         $event->delete();
@@ -110,10 +92,17 @@ class EventController extends Controller
         }
 
         $file = $request->file('file');
-        $csv = Reader::createFromPath($file->getPathname(), 'r');
-        $csv->setHeaderOffset(0);
 
-        $records = $csv->getRecords();
+        try {
+            $csv = Reader::createFromPath($file->getPathname(), 'r');
+            $csv->setHeaderOffset(0);
+
+            $records = $csv->getRecords();
+        } catch (\Exception $e) {
+            return redirect()->route('events.index')
+                ->with('error', 'Error reading CSV file: ' . $e->getMessage());
+        }
+
         $createdCount = 0;
         $updatedCount = 0;
         $errors = [];
@@ -151,11 +140,29 @@ class EventController extends Controller
         $message = "{$createdCount} events created, {$updatedCount} events updated successfully.";
         if ($errors) {
             return redirect()->route('events.index')
-                ->with('warning', $message . "\nErrors occurred:\n" . implode("\n", $errors));
+                ->with('error', $message . "\nErrors occurred:\n" . implode("\n", $errors));
         }
 
         return redirect()->route('events.index')
             ->with('success', $message);
+    }
+
+    public function update(Request $request, Event $event)
+    {
+        $validated = $this->validateEvent($request);
+
+        $eventData = array_diff_key($validated, array_flip(['image']));
+        $event->update($eventData);
+
+        if ($request->hasFile('image')) {
+            $event->clearMediaCollection();
+            $event->addMediaFromRequest('image')->toMediaCollection();
+        } elseif ($request->boolean('delete_image')) {
+            $event->clearMediaCollection('event_image');
+        }
+
+        return redirect()->route('events.edit', $event)
+            ->with('success', 'Event updated successfully.');
     }
 
     public function export()

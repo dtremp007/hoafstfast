@@ -4,6 +4,7 @@ import {EventCard} from "@/components/EventCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {Inertia} from "@inertiajs/inertia";
 import {Head, usePage} from "@inertiajs/react";
+import DashboardLayout from "@/Layouts/DashboardLayout";
 
 type EventScheduleProps = {
     eventsByDay: {
@@ -15,7 +16,7 @@ type EventScheduleProps = {
     }[]
 }
 
-export default function EventSchedule({ eventsByDay }: EventScheduleProps) {
+const EventSchedule = ({ eventsByDay }: EventScheduleProps) => {
     // return (
     //     <pre>
     //         {JSON.stringify(eventsByDay, null, 2)}
@@ -30,7 +31,7 @@ export default function EventSchedule({ eventsByDay }: EventScheduleProps) {
     };
 
     return (
-        <div className="max-w-md mx-auto bg-background px-3 pb-8">
+        <div className="max-w-md mx-auto w-full bg-background px-3 pb-8">
             <Head title="Schedule" />
             <h1 className="text-2xl font-bold text-center py-4">Hoafstfast 🌽</h1>
 
@@ -63,6 +64,10 @@ export default function EventSchedule({ eventsByDay }: EventScheduleProps) {
         </div>
     );
 }
+
+EventSchedule.layout = (page: React.ReactNode) => <DashboardLayout>{page}</DashboardLayout>
+
+export default EventSchedule
 
 function convertTo12HourFormat(time24: string): string {
     const [hours, minutes] = time24.split(':');

@@ -51,7 +51,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
         'eventsByDay' => $events,
     ]);
-});
+})->name('schedule');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {

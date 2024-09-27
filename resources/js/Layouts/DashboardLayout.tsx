@@ -23,14 +23,14 @@ import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet"
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
 import {Toaster} from "@/components/ui/toaster";
 import {useToast} from "@/hooks/use-toast";
-import {usePage} from "@inertiajs/react";
+import {router, usePage} from "@inertiajs/react";
 
 type DashboardLayoutProps = {
     children: React.ReactNode
 }
 export default function DashboardLayout({children}: DashboardLayoutProps) {
     const {toast} = useToast()
-    const {flash, url} = usePage().props
+    const {props: {flash, auth: {user}}, url} = usePage()
 
     React.useEffect(() => {
         if (flash.success) {
@@ -48,6 +48,10 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
         }
     }, [flash])
 
+    if (!user) {
+        return children;
+    }
+
     return (
         <TooltipProvider>
             <Toaster/>
@@ -55,7 +59,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                 <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
                     <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
                         <Link
-                            href={route('dashboard')}
+                            href={route('schedule')}
                             className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                         >
                             <Calendar className="h-4 w-4 transition-all group-hover:scale-110"/>
@@ -65,7 +69,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href={route('dashboard')}
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg ${url.startsWith("/dashboard") ? "bg-accent text-accent-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground md:h-8 md:w-8`}
                                 >
                                     <Home className="h-5 w-5"/>
                                     <span className="sr-only">Dashboard</span>
@@ -77,7 +81,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href={route('events.index')}
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg ${url.startsWith("/events") ? "bg-accent text-accent-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground md:h-8 md:w-8`}
                                 >
                                     <Calendar className="h-5 w-5"/>
                                     <span className="sr-only">Events</span>
@@ -89,7 +93,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href={route('locations.index')}
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={`flex h-9 w-9 items-center justify-center rounded-lg ${url.startsWith("/locations") ? "bg-accent text-accent-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground md:h-8 md:w-8`}
                                 >
                                     <MapPin className="h-5 w-5"/>
                                     <span className="sr-only">Locations</span>
@@ -150,7 +154,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                             <SheetContent side="left" className="sm:max-w-xs">
                                 <nav className="grid gap-6 text-lg font-medium">
                                     <Link
-                                        href={route('dashboard')}
+                                        href={route('schedule')}
                                         className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                                     >
                                         <Calendar className="h-5 w-5 transition-all group-hover:scale-110"/>
@@ -229,7 +233,7 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                                     className="overflow-hidden rounded-full"
                                 >
                                     <img
-                                        src="/placeholder-user.jpg"
+                                        src="https://randomuser.me/api/portraits"
                                         width={36}
                                         height={36}
                                         alt="User avatar"
@@ -243,7 +247,9 @@ export default function DashboardLayout({children}: DashboardLayoutProps) {
                                 <DropdownMenuItem>Settings</DropdownMenuItem>
                                 <DropdownMenuItem>Support</DropdownMenuItem>
                                 <DropdownMenuSeparator/>
-                                <DropdownMenuItem>Logout</DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => {
+                                    router.post(route('logout'))
+                                }}>Logout</DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </header>

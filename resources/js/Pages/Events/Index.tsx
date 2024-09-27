@@ -51,11 +51,12 @@ const Index = ({events}: {
                                 input.accept = '.csv';
                                 input.onchange = (e) => {
                                     const file = (e.target as HTMLInputElement).files?.[0];
+                                    console.log(file);
                                     if (file) {
                                         const formData = new FormData();
                                         formData.append('file', file);
                                         router.post(route('events.upload'), formData, {
-                                            forceFormData: this,
+                                            forceFormData: true,
                                         });
                                     }
                                 };
