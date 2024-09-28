@@ -21,7 +21,7 @@ type EditProps = {
 
 const Edit = ({locations, event}: EditProps) => {
     const {flash} = usePage().props;
-    const [timeIncrements] = React.useState(generateTimeIncrements('09:00', '18:00'));
+    const [timeIncrements] = React.useState(generateTimeIncrements('09:00', '21:00'));
     const [durationIncrements] = React.useState(generateDurationIncrements(90));
     const [image, setImage] = React.useState<File | null>(null);
 
