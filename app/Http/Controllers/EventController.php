@@ -56,7 +56,7 @@ class EventController extends Controller
             $event->addMediaFromRequest('image')->toMediaCollection();
         }
 
-        return redirect()->route('events.edit', $event)
+        return redirect()->route('events.index', $event)
             ->with('success', 'Event created successfully.');
     }
 
@@ -172,7 +172,7 @@ class EventController extends Controller
             $event->clearMediaCollection('event_image');
         }
 
-        return redirect()->route('events.edit', $event)
+        return redirect()->route('events.index', $event)
             ->with('success', 'Event updated successfully.');
     }
 
