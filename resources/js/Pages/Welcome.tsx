@@ -23,7 +23,7 @@ const EventSchedule = ({eventsByDay}: EventScheduleProps) => {
     // )
 
     // choose today or the first day
-    const [activeDay, setActiveDay] = React.useState(eventsByDay[1].date);
+    const [activeDay, setActiveDay] = React.useState(eventsByDay[2].date);
 
     const handleTabChange = (value: string) => {
         setActiveDay(value);
