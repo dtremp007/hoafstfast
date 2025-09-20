@@ -1,0 +1,35 @@
+---
+interface Props {
+  className?: string; // Optional prop for the class
+  image: string;
+  title: string;
+  description: string;
+}
+
+const { className, image, title, description } = Astro.props;
+import { cn } from "@/lib/utils";
+---
+
+<section
+  class={cn("relative bg-black h-auto md:h-[85svh] flex flex-col", className)}
+  data-type="splitColumn"
+>
+  {
+    (
+      <img
+        src={image}
+        class:list={cn(
+          "static md:absolute h-full w-full md:w-1/2 right-0 object-cover"
+        )}
+      />
+    )
+  }
+  <div
+    class="container text-background mx-auto h-full static md:absolute inset-0 flex flex-col justify-center gap-8 py-10 md:py-0"
+  >
+    <div class="w-full md:w-1/2 md:pr-10">
+      <h1 class="text-4xl font-bold">{title}</h1>
+      <p class="text-2xl mt-4">{description}</p>
+    </div>
+  </div>
+</section>

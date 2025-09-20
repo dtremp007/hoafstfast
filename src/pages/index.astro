@@ -1,102 +1,29 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SplitColumn from "../components/heroes/SplitColumn.astro";
 ---
 
 <Layout>
-  <!-- Navigation -->
-  <nav class="bg-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <!-- Logo -->
-        <div class="flex-shrink-0">
-          <h1 class="text-2xl font-bold text-festival-orange">
-            FESTIVAL DE OTOÑO CUAUHTÉMOC
-          </h1>
-        </div>
-
-        <!-- Navigation Menu -->
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-4">
-            <a
-              href="/"
-              class="text-gray-900 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
-              >Inicio</a
-            >
-            <a
-              href="/itinerario"
-              class="text-gray-700 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
-              >Itinerario</a
-            >
-            <a
-              href="/historias"
-              class="text-gray-700 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
-              >Historias de éxito</a
-            >
-            <a
-              href="/contacto"
-              class="text-gray-700 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
-              >Contáctanos</a
-            >
-          </div>
-        </div>
-
-        <!-- Contact Info -->
-        <div class="hidden md:flex items-center space-x-4">
-          <a
-            href="tel:+5262510383-46"
-            class="text-festival-orange hover:text-festival-brown flex items-center"
-          >
-            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
-              ></path>
-            </svg>
-            +52 625 10383-46
-          </a>
-        </div>
+  <nav class="bg-white">
+    <div class="container mx-auto flex justify-between items-center gap-16 py-4">
+      <img
+        src="/logo.png"
+        alt="Festival de Otoño Cuauhtémoc"
+        class="h-24 w-24 ml-4"
+      />
+      <div class="flex items-center space-x-4">
+        <a
+          href="#contacto"
+          class="hover:text-festival-brown">Contáctanos</a
+        >
       </div>
     </div>
   </nav>
-
-  <!-- Hero Section -->
-  <section id="inicio" class="relative text-white py-20 h-[800px]">
-    <img
-      src="https://festivaldeotonocuauhtemoc1.odoo.com/web/image/1067-c6276b11/IMGL0894.webp"
-      alt="Festival de Otoño Cuauhtémoc"
-      class="w-full h-full object-cover absolute top-0 left-0"
-    />
-    <!-- overlay -->
-    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
-    <div
-      class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-    >
-      <div class="mb-8">
-        <p class="text-xl mb-4">¡LISTO PARA VIVIR ESTA EXPERIENCIA!</p>
-        <button
-          class="bg-festival-gold text-festival-brown px-8 py-3 rounded-full font-bold hover:bg-yellow-300 transition-colors"
-        >
-          Obtener más información →
-        </button>
-      </div>
-
-      <h1 class="text-5xl md:text-6xl font-bold mb-6">
-        FESTIVAL DE OTOÑO CUAUHTÉMOC
-      </h1>
-
-      <div class="text-2xl md:text-3xl mb-8">
-        <span class="text-4xl">🍂✨</span>
-        <em class="block mt-2"
-          >"Unidos por la tradición, inspirados en la solidaridad"</em
-        >
-        <span class="text-4xl">✨🍂</span>
-      </div>
-
-      <div class="text-xl space-y-2">
-        <p class="font-bold">KILOMETRO 32 DEL CORREDOR COMERCIAL</p>
-        <p class="font-bold">CAMPO 12B</p>
-      </div>
-    </div>
-  </section>
+  <SplitColumn
+    image="https://festivaldeotonocuauhtemoc1.odoo.com/web/image/1067-c6276b11/IMGL0894.webp"
+    title="FESTIVAL DE OTOÑO CUAUHTÉMOC"
+    description="Unidos por la tradición, inspirados en la solidaridad"
+  />
 
   <!-- About Festival Section -->
   <section class="py-16 bg-white">
@@ -389,165 +316,82 @@ import Layout from "../layouts/Layout.astro";
 
       <div class="bg-white rounded-lg p-8 shadow-lg">
         <iframe
-          width="1164"
-          height="655"
           src="https://www.youtube.com/embed/svydduOIlOs?list=TLGGNT-xMShUTYkyMDA5MjAyNQ"
           title="Kürbisfest - Festival de la Calabaza - Cuauhtemoc 2022"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
+          class="w-full h-auto aspect-video"
           allowfullscreen></iframe>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section class="py-16 bg-festival-orange text-white">
+  <section class="py-16 bg-festival-orange text-white" id="contacto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h3 class="text-4xl font-bold text-center mb-12">Contáctanos</h3>
 
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- Contact Form -->
-        <div class="bg-white text-gray-800 p-8 rounded-lg">
-          <p class="mb-6 text-gray-700">
-            Contáctenos sobre cualquier cosa relacionada con nuestra empresa o
-            servicios. Haremos todo lo posible por responderle a la brevedad.
-          </p>
+      <!-- Contact Information -->
+      <div class="space-y-8">
+        <div>
+          <h4 class="text-2xl font-bold mb-6">Mi Empresa</h4>
 
-          <form class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Nombre *</label
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <svg
+                class="w-6 h-6 mr-3 mt-1 text-festival-gold"
+                fill="currentColor"
+                viewBox="0 0 20 20"
               >
-              <input
-                type="text"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
-              />
+                <path
+                  fill-rule="evenodd"
+                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <p class="text-lg">
+                Kilometro 32, campo 12 B corredor comercial manitoba
+              </p>
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Número de teléfono</label
+            <div class="flex items-center">
+              <svg
+                class="w-6 h-6 mr-3 text-festival-gold"
+                fill="currentColor"
+                viewBox="0 0 20 20"
               >
-              <input
-                type="tel"
-                value="+52"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
-              />
+                <path
+                  d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+                ></path>
+              </svg>
+              <p class="text-lg">+52 625 10383</p>
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Correo electrónico *</label
+            <div class="flex items-center">
+              <svg
+                class="w-6 h-6 mr-3 text-festival-gold"
+                fill="currentColor"
+                viewBox="0 0 20 20"
               >
-              <input
-                type="email"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Empresa</label
-              >
-              <input
-                type="text"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Asunto *</label
-              >
-              <input
-                type="text"
-                required
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Pregunta *</label
-              >
-              <textarea
-                required
-                rows="4"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-festival-orange text-white py-3 px-6 rounded-md hover:bg-orange-600 transition-colors font-bold"
-            >
-              Enviar
-            </button>
-          </form>
-        </div>
-
-        <!-- Contact Information -->
-        <div class="space-y-8">
-          <div>
-            <h4 class="text-2xl font-bold mb-6">Mi Empresa</h4>
-
-            <div class="space-y-4">
-              <div class="flex items-start">
-                <svg
-                  class="w-6 h-6 mr-3 mt-1 text-festival-gold"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clip-rule="evenodd"></path>
-                </svg>
-                <p class="text-lg">
-                  Kilometro 32, campo 12 B corredor comercial manitoba
-                </p>
-              </div>
-
-              <div class="flex items-center">
-                <svg
-                  class="w-6 h-6 mr-3 text-festival-gold"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
-                  ></path>
-                </svg>
-                <p class="text-lg">+52 625-103-83-46</p>
-              </div>
-
-              <div class="flex items-center">
-                <svg
-                  class="w-6 h-6 mr-3 text-festival-gold"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
-                  ></path>
-                  <path
-                    d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-                  ></path>
-                </svg>
-                <p class="text-lg">festivaldeotonocuauhtemoc@gmail.com</p>
-              </div>
+                <path
+                  d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+                ></path>
+                <path
+                  d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+                ></path>
+              </svg>
+              <p class="text-lg">festivaldeotonocuauhtemoc@gmail.com</p>
             </div>
           </div>
 
           <!-- Additional Contact Numbers -->
-          <div class="bg-white bg-opacity-20 p-6 rounded-lg">
+          <div
+            class="bg-background text-foreground bg-opacity-20 p-6 mt-4 rounded-lg"
+          >
             <h5 class="text-xl font-bold mb-4">Otros Números de Contacto</h5>
             <div class="space-y-2">
-              <p>+52 625 10383-46</p>
-              <p>+520625 130 8343-</p>
+              <p>+52 625 10383</p>
+              <p>+520625 130 8343</p>
             </div>
           </div>
         </div>
@@ -558,21 +402,8 @@ import Layout from "../layouts/Layout.astro";
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <p class="text-gray-400 mb-4">
-          Derechos de autor y nombre de la empresa
-        </p>
-        <p class="text-sm text-gray-500">
-          Con la tecnología de <a
-            href="http://www.odoo.com"
-            class="text-festival-orange hover:underline">Odoo</a
-          > - El mejor <a
-            href="http://www.odoo.com/app/ecommerce"
-            class="text-festival-orange hover:underline"
-            >Comercio electrónico de código abierto</a
-          >
-        </p>
-      </div>
+      <div class="text-center">Made by AI + David Rempel 😉</div>
+      <div class="text-center mt-4">That's why it looks like 💩</div>
     </div>
   </footer>
 </Layout>
