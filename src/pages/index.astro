@@ -1,11 +1,578 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <h1 class="text-2xl font-bold text-festival-orange">
+            FESTIVAL DE OTOÑO CUAUHTÉMOC
+          </h1>
+        </div>
+
+        <!-- Navigation Menu -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a
+              href="/"
+              class="text-gray-900 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
+              >Inicio</a
+            >
+            <a
+              href="/itinerario"
+              class="text-gray-700 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
+              >Itinerario</a
+            >
+            <a
+              href="/historias"
+              class="text-gray-700 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
+              >Historias de éxito</a
+            >
+            <a
+              href="/contacto"
+              class="text-gray-700 hover:text-festival-orange px-3 py-2 rounded-md text-sm font-medium"
+              >Contáctanos</a
+            >
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="hidden md:flex items-center space-x-4">
+          <a
+            href="tel:+5262510383-46"
+            class="text-festival-orange hover:text-festival-brown flex items-center"
+          >
+            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+              ></path>
+            </svg>
+            +52 625 10383-46
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="relative text-white py-20 h-[800px]">
+    <img
+      src="https://festivaldeotonocuauhtemoc1.odoo.com/web/image/1067-c6276b11/IMGL0894.webp"
+      alt="Festival de Otoño Cuauhtémoc"
+      class="w-full h-full object-cover absolute top-0 left-0"
+    />
+    <!-- overlay -->
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+    <div
+      class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+    >
+      <div class="mb-8">
+        <p class="text-xl mb-4">¡LISTO PARA VIVIR ESTA EXPERIENCIA!</p>
+        <button
+          class="bg-festival-gold text-festival-brown px-8 py-3 rounded-full font-bold hover:bg-yellow-300 transition-colors"
+        >
+          Obtener más información →
+        </button>
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+        FESTIVAL DE OTOÑO CUAUHTÉMOC
+      </h1>
+
+      <div class="text-2xl md:text-3xl mb-8">
+        <span class="text-4xl">🍂✨</span>
+        <em class="block mt-2"
+          >"Unidos por la tradición, inspirados en la solidaridad"</em
+        >
+        <span class="text-4xl">✨🍂</span>
+      </div>
+
+      <div class="text-xl space-y-2">
+        <p class="font-bold">KILOMETRO 32 DEL CORREDOR COMERCIAL</p>
+        <p class="font-bold">CAMPO 12B</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Festival Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-center mb-12 text-festival-orange">
+        🍂 Sobre el Festival🍂
+      </h2>
+
+      <!-- History and Purpose -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-6 text-festival-brown">
+          Historia y Propósito
+        </h3>
+        <div class="prose prose-lg max-w-none">
+          <p class="text-gray-700 leading-relaxed">
+            <strong>Festival de Otoño</strong> nace como una iniciativa comunitaria
+            con el propósito de celebrar nuestras tradiciones, fomentar la convivencia
+            familiar y fortalecer los lazos entre las culturas que dan vida a nuestra
+            región. Más que un evento artístico y cultural, este festival representa
+            un espacio donde la música, la danza, la gastronomía y el arte se unen
+            en un ambiente de alegría, solidaridad y colaboración ciudadana.
+          </p>
+        </div>
+      </div>
+
+      <!-- Social Cause -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-6 text-festival-brown">
+          Causa Social
+        </h3>
+        <div class="prose prose-lg max-w-none">
+          <p class="text-gray-700 leading-relaxed">
+            Una de las características que hacen único al Festival de Otoño es
+            su <strong>compromiso social</strong>. Cada edición busca recaudar
+            fondos para <strong
+              >instituciones de asistencia y proyectos comunitarios</strong
+            > que dependen del apoyo de la sociedad para continuar su labor. Gracias
+            a la generosidad de los asistentes y patrocinadores, se logra impulsar
+            programas que benefician a niños, niñas, adolescentes, mujeres y adultos
+            mayores en situación vulnerable.
+          </p>
+        </div>
+      </div>
+
+      <!-- Previous Impact -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold mb-6 text-festival-brown">
+          Impacto Anterior
+        </h3>
+        <p class="text-gray-700 mb-6">
+          En sus ediciones anteriores, el Festival ha demostrado su capacidad de <strong
+            >transformar la celebración en ayuda tangible</strong
+          >.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div
+            class="text-center p-6 bg-gradient-to-br from-festival-orange to-festival-brown text-white rounded-lg"
+          >
+            <div class="text-4xl font-bold mb-2">35,000+</div>
+            <p class="text-lg">
+              Asistentes reunidos, consolidándose como un evento reconocido en
+              todo el estado
+            </p>
+          </div>
+          <div
+            class="text-center p-6 bg-gradient-to-br from-festival-gold to-yellow-500 text-festival-brown rounded-lg"
+          >
+            <div class="text-4xl font-bold mb-2">$10M+</div>
+            <p class="text-lg">
+              Pesos recaudados, destinados a apoyar diversas instituciones de
+              asistencia social
+            </p>
+          </div>
+          <div
+            class="text-center p-6 bg-gradient-to-br from-festival-green to-green-600 text-white rounded-lg"
+          >
+            <div class="text-4xl font-bold mb-2">50,000+</div>
+            <p class="text-lg">
+              Personas beneficiadas directamente gracias a la colaboración de la
+              comunidad
+            </p>
+          </div>
+        </div>
+
+        <p class="text-gray-700 text-center italic">
+          Cada año buscamos superar estos logros, convencidos de que juntos
+          podemos seguir haciendo historia y creando un impacto positivo que
+          trascienda generaciones.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Section -->
+  <section
+    class="py-16 bg-gradient-to-r from-festival-green to-green-600 text-white"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="text-3xl font-bold text-center mb-8">
+        UNIDOS POR LA COMUNIDAD
+      </h3>
+
+      <div class="prose prose-lg max-w-none text-center">
+        <p class="text-xl mb-6">
+          El <strong>Festival de Otoño</strong> es el reflejo de lo que podemos lograr
+          cuando trabajamos en conjunto. A lo largo de los años, hemos contado con
+          el valioso respaldo del <strong>Gobierno Municipal</strong>, así como
+          con la generosidad de <strong
+            >empresas locales, negocios familiares y microempresas</strong
+          > que han confiado en este proyecto y se han sumado para hacerlo crecer.
+        </p>
+
+        <p class="text-xl mb-6">
+          Detrás de cada actividad, cada presentación y cada espacio del
+          festival, existe el esfuerzo de una gran red de colaboración. Hoy
+          somos más de <strong>400 voluntarios</strong> que, con entrega y entusiasmo,
+          aportan su tiempo, talento y corazón para que este evento sea una realidad.
+        </p>
+
+        <p class="text-xl">
+          Gracias a esta unión de voluntades, el Festival de Otoño se ha
+          consolidado como un acontecimiento que no solo celebra nuestras
+          tradiciones, sino que también transforma la solidaridad en ayuda
+          concreta para quienes más lo necesitan.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission, Vision, Objectives -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Mission -->
+        <div
+          class="text-center p-8 bg-gradient-to-br from-festival-orange to-festival-brown text-white rounded-lg"
+        >
+          <h4 class="text-2xl font-bold mb-4">MISIÓN</h4>
+          <p class="text-sm leading-relaxed">
+            Organizar un festival que impulse el talento local con
+            presentaciones artísticas exclusivas, fomente la economía regional
+            mediante la participación de comercios locales, y promueva la
+            diversidad gastronómica, deportiva y cultural. Además, contribuir al
+            desarrollo social recaudando fondos para instituciones necesitadas,
+            celebrando nuestras tradiciones y fortaleciendo el vínculo
+            comunitario.
+          </p>
+        </div>
+
+        <!-- Objective -->
+        <div
+          class="text-center p-8 bg-gradient-to-br from-festival-gold to-yellow-500 text-festival-brown rounded-lg"
+        >
+          <h4 class="text-2xl font-bold mb-4">OBJETIVO</h4>
+          <p class="text-sm leading-relaxed">
+            "El Festival de Otoño, impulsado por la comunidad menonita desde
+            2014, busca generar un impacto positivo en la sociedad mediante la
+            promoción de artistas y productores locales, la celebración de
+            tradiciones y la recaudación de fondos en beneficio de casas
+            hogares, centros de rehabilitación y proyectos comunitarios."
+          </p>
+        </div>
+
+        <!-- Vision -->
+        <div
+          class="text-center p-8 bg-gradient-to-br from-festival-green to-green-600 text-white rounded-lg"
+        >
+          <h4 class="text-2xl font-bold mb-4">VISIÓN</h4>
+          <p class="text-sm leading-relaxed">
+            Consolidar el Festival de Otoño como un símbolo de unidad,
+            creatividad y solidaridad, destacando como el principal evento
+            cultural y social que transforma talentos locales, impulsa el
+            comercio regional y genera un impacto positivo en las instituciones
+            que más lo necesitan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cultural Section -->
+  <section
+    class="py-16 bg-gradient-to-r from-festival-brown to-festival-orange text-white"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-4xl font-bold mb-6">
+        EN EL CORAZ<span class="text-festival-gold">Ó</span>N DE CHIHUAHUA LATE
+        TAMBI<span class="text-festival-gold">É</span>N LA CULTURA MENONITA
+      </h2>
+      <p class="text-xl">
+        Transforme su experiencia con nuestro festival que combina música, arte
+        y gastronomía. Nuestras actividades fusionan a la perfección diversión
+        con cultura.
+      </p>
+    </div>
+  </section>
+
+  <!-- Activities Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="text-4xl font-bold text-center mb-4 text-festival-orange">
+        NUESTRAS ACTIVIDADES
+      </h3>
+      <p class="text-xl text-center mb-12 text-gray-700">
+        TENEMOS PLANEADO UN SIN FIN DE ACTIVIDADES PARA TI
+      </p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Music and Art -->
+        <div
+          class="bg-gradient-to-br from-purple-100 to-pink-100 p-6 rounded-lg"
+        >
+          <h4 class="text-2xl font-bold mb-4 text-purple-800 flex items-center">
+            <span class="text-3xl mr-2">🎵</span>
+            Música y Arte
+          </h4>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Música en vivo</li>
+            <li>• Cantantes locales</li>
+            <li>• Teatro para toda la familia</li>
+          </ul>
+        </div>
+
+        <!-- Children's Fun -->
+        <div class="bg-gradient-to-br from-blue-100 to-cyan-100 p-6 rounded-lg">
+          <h4 class="text-2xl font-bold mb-4 text-blue-800 flex items-center">
+            <span class="text-3xl mr-2">🎈</span>
+            Diversión Infantil
+          </h4>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Juegos tradicionales</li>
+            <li>• Actividades recreativas</li>
+          </ul>
+        </div>
+
+        <!-- Competitions and Sports -->
+        <div
+          class="bg-gradient-to-br from-green-100 to-emerald-100 p-6 rounded-lg"
+        >
+          <h4 class="text-2xl font-bold mb-4 text-green-800 flex items-center">
+            <span class="text-3xl mr-2">🏆</span>
+            Competencias y Deportes
+          </h4>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Torneos deportivos</li>
+            <li>• Carrera de barriles</li>
+            <li>• Competencia de cortes</li>
+          </ul>
+        </div>
+
+        <!-- Special Contests -->
+        <div
+          class="bg-gradient-to-br from-yellow-100 to-orange-100 p-6 rounded-lg"
+        >
+          <h4 class="text-2xl font-bold mb-4 text-orange-800 flex items-center">
+            <span class="text-3xl mr-2">🏅</span>
+            Concursos Especiales
+          </h4>
+          <ul class="space-y-2 text-gray-700">
+            <li>• La calabaza más grande</li>
+            <li>• La manzana más grande</li>
+            <li>• La mazorca más pesada</li>
+          </ul>
+        </div>
+
+        <!-- Tradition and Exhibitions -->
+        <div
+          class="bg-gradient-to-br from-amber-100 to-yellow-100 p-6 rounded-lg"
+        >
+          <h4 class="text-2xl font-bold mb-4 text-amber-800 flex items-center">
+            <span class="text-3xl mr-2">🏛️</span>
+            Tradición y Exposiciones
+          </h4>
+          <ul class="space-y-2 text-gray-700">
+            <li>• Exposición ganadera</li>
+            <li>• Repostería menonita</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Previous Editions Section -->
+  <section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="text-4xl font-bold text-center mb-12 text-festival-orange">
+        CONOCE NUESTRAS EDICIONES ANTERIORES
+      </h3>
+
+      <div class="bg-white rounded-lg p-8 shadow-lg">
+        <iframe
+          width="1164"
+          height="655"
+          src="https://www.youtube.com/embed/svydduOIlOs?list=TLGGNT-xMShUTYkyMDA5MjAyNQ"
+          title="Kürbisfest - Festival de la Calabaza - Cuauhtemoc 2022"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="py-16 bg-festival-orange text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h3 class="text-4xl font-bold text-center mb-12">Contáctanos</h3>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="bg-white text-gray-800 p-8 rounded-lg">
+          <p class="mb-6 text-gray-700">
+            Contáctenos sobre cualquier cosa relacionada con nuestra empresa o
+            servicios. Haremos todo lo posible por responderle a la brevedad.
+          </p>
+
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Nombre *</label
+              >
+              <input
+                type="text"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Número de teléfono</label
+              >
+              <input
+                type="tel"
+                value="+52"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Correo electrónico *</label
+              >
+              <input
+                type="email"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Empresa</label
+              >
+              <input
+                type="text"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Asunto *</label
+              >
+              <input
+                type="text"
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Pregunta *</label
+              >
+              <textarea
+                required
+                rows="4"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-festival-orange"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-festival-orange text-white py-3 px-6 rounded-md hover:bg-orange-600 transition-colors font-bold"
+            >
+              Enviar
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="space-y-8">
+          <div>
+            <h4 class="text-2xl font-bold mb-6">Mi Empresa</h4>
+
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <svg
+                  class="w-6 h-6 mr-3 mt-1 text-festival-gold"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <p class="text-lg">
+                  Kilometro 32, campo 12 B corredor comercial manitoba
+                </p>
+              </div>
+
+              <div class="flex items-center">
+                <svg
+                  class="w-6 h-6 mr-3 text-festival-gold"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+                  ></path>
+                </svg>
+                <p class="text-lg">+52 625-103-83-46</p>
+              </div>
+
+              <div class="flex items-center">
+                <svg
+                  class="w-6 h-6 mr-3 text-festival-gold"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+                  ></path>
+                  <path
+                    d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+                  ></path>
+                </svg>
+                <p class="text-lg">festivaldeotonocuauhtemoc@gmail.com</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Contact Numbers -->
+          <div class="bg-white bg-opacity-20 p-6 rounded-lg">
+            <h5 class="text-xl font-bold mb-4">Otros Números de Contacto</h5>
+            <div class="space-y-2">
+              <p>+52 625 10383-46</p>
+              <p>+520625 130 8343-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-gray-400 mb-4">
+          Derechos de autor y nombre de la empresa
+        </p>
+        <p class="text-sm text-gray-500">
+          Con la tecnología de <a
+            href="http://www.odoo.com"
+            class="text-festival-orange hover:underline">Odoo</a
+          > - El mejor <a
+            href="http://www.odoo.com/app/ecommerce"
+            class="text-festival-orange hover:underline"
+            >Comercio electrónico de código abierto</a
+          >
+        </p>
+      </div>
+    </div>
+  </footer>
 </Layout>

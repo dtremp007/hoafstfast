@@ -1,46 +1,85 @@
-# Astro Starter Kit: Basics
+# Festival de Otoño Cuauhtémoc Website
 
-```sh
-pnpm create astro@latest -- --template basics
+A modern, responsive website for the Festival de Otoño Cuauhtémoc, built with Astro and Tailwind CSS.
+
+## Features
+
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Multi-page Structure**: Home, Itinerary, Success Stories, and Contact pages
+- **Festival Branding**: Custom color scheme matching the festival theme
+- **Contact Form**: Functional contact form with validation
+- **Accessibility**: Semantic HTML and proper ARIA labels
+
+## Pages
+
+- **Home** (`/`): Main landing page with festival information, activities, and impact statistics
+- **Itinerario** (`/itinerario`): Festival schedule and program details
+- **Historias de éxito** (`/historias`): Success stories and testimonials
+- **Contáctanos** (`/contacto`): Contact information and form
+
+## Technology Stack
+
+- **Astro**: Static site generator
+- **Tailwind CSS**: Utility-first CSS framework
+- **TypeScript**: Type safety and better development experience
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open your browser and visit `http://localhost:4321`
+
+## Building for Production
+
+```bash
+npm run build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The built files will be in the `dist/` directory.
 
-## 🚀 Project Structure
+## Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```
+src/
+├── layouts/
+│   └── Layout.astro          # Main layout component
+├── pages/
+│   ├── index.astro           # Home page
+│   ├── itinerario.astro      # Itinerary page
+│   ├── historias.astro       # Success stories page
+│   └── contacto.astro        # Contact page
+├── styles/
+│   └── global.css            # Global styles and Tailwind imports
+└── components/               # Reusable components (if needed)
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Content
 
-## 🧞 Commands
+The website content is based on the original Festival de Otoño Cuauhtémoc website, including:
 
-All commands are run from the root of the project, from a terminal:
+- Festival mission, vision, and objectives
+- Community impact statistics
+- Activity categories and descriptions
+- Contact information and form
+- Social cause information
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## Customization
 
-## 👀 Want to learn more?
+The website uses a custom color palette defined in `tailwind.config.mjs`:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `festival-orange`: #FF6B35
+- `festival-brown`: #8B4513
+- `festival-gold`: #FFD700
+- `festival-green`: #228B22
+
+## License
+
+This project is for the Festival de Otoño Cuauhtémoc community.

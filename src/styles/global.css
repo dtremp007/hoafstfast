@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --color-festival-orange: #ff6b35;
+  --color-festival-brown: #8b4513;
+  --color-festival-gold: #ffd700;
+  --color-festival-green: #228b22;
+}
