@@ -1,0 +1,41 @@
+---
+import type { GallerySection } from "@/types/hygraph";
+
+interface Props {
+  section: GallerySection;
+}
+
+const { section } = Astro.props;
+const imageCount = section?.images?.length ?? 0;
+
+// if divisible by two, use two columns
+// if divisible by three, use three columns
+const gridClass =
+  imageCount <= 1
+    ? "grid-cols-1"
+    : imageCount % 2 === 0
+      ? "md:grid-cols-2"
+      : imageCount % 3 === 0
+        ? "md:grid-cols-3"
+        : "md:grid-cols-2 lg:grid-cols-3";
+---
+
+<section class="py-12 px-2">
+  <div class="max-w-7xl mx-auto">
+    <div class={`grid grid-cols-1 gap-4 ${gridClass}`}>
+      {
+        section.images?.map((img) => (
+          <img
+            src={img.url}
+            alt=""
+            width={img.width}
+            height={img.height}
+            class="w-full h-auto rounded-lg object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

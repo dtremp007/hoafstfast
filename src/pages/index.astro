@@ -2,7 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import { fetchPageData } from "../lib/hygraph";
 import type { Page } from "../types/hygraph";
-import RenderSection from "../components/sections/RenderSection.astro";
+import RenderSection from "../components/sections/ImageSection/RenderSection.astro";
+import GallerySection from "../components/sections/GallerySection.astro";
+import GridSection from "../components/sections/GridSection.astro";
+import YouTubeSection from "../components/sections/YouTubeSection.astro";
+import { buttonVariants } from "../components/Button.astro";
 
 // Fetch page data from Hygraph
 let pageData: Page | null = null;
@@ -10,16 +14,16 @@ try {
   const response = await fetchPageData({ slug: "home" });
   pageData = response.data.page;
 } catch (error) {
-  console.error('Error fetching page data:', error);
+  console.error("Error fetching page data:", error);
   // Fallback to default data if Hygraph is not available
 }
 ---
 
 <Layout
-  title="Festival de Otoño Cuauhtémoc | Herbstfest (Hoafstfast) | Evento cultural"
+  title="Festival de Otoño Cuauhtémoc | Herbstfest (Hoafstfast)"
   description="Festival de Otoño (Herbstfest / Hoafstfast) en Cuauhtémoc, Chihuahua: música, arte, gastronomía y causa social. Evento cultural organizado por la comunidad menonita."
 >
-  <nav class="bg-white">
+  <nav>
     <div class="container mx-auto flex justify-between items-center gap-16 p-4">
       <img
         src="/logo.png"
@@ -27,324 +31,29 @@ try {
         class="h-24 w-24"
       />
       <div class="flex items-center space-x-4">
-        <a
-          href="#contacto"
-          class="hover:text-festival-brown">Contáctanos</a
-        >
+        <a href="#contacto" class={buttonVariants({ variant: "default" })}>Contáctanos</a>
       </div>
     </div>
   </nav>
   <!-- Dynamic Sections from Hygraph -->
-  {pageData && pageData.sections && pageData.sections.length > 0 ? (
-    pageData.sections.map((section) => (
-      <RenderSection type={section.sectionType} title={section.title} description={section.description} image={section.image.url} />
-    ))
-  ) : null}
-
-  <!-- About Festival Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-center mb-12 text-festival-orange">
-        🍂 Sobre el Festival🍂
-      </h2>
-
-      <!-- History and Purpose -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-bold mb-6 text-festival-brown">
-          Historia y Propósito
-        </h3>
-        <div class="prose prose-lg max-w-none">
-          <p class="text-gray-700 leading-relaxed">
-            <strong>Festival de Otoño</strong> nace como una iniciativa comunitaria
-            con el propósito de celebrar nuestras tradiciones, fomentar la convivencia
-            familiar y fortalecer los lazos entre las culturas que dan vida a nuestra
-            región. Más que un evento artístico y cultural, este festival representa
-            un espacio donde la música, la danza, la gastronomía y el arte se unen
-            en un ambiente de alegría, solidaridad y colaboración ciudadana.
-          </p>
-        </div>
-      </div>
-
-      <!-- Social Cause -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-bold mb-6 text-festival-brown">
-          Causa Social
-        </h3>
-        <div class="prose prose-lg max-w-none">
-          <p class="text-gray-700 leading-relaxed">
-            Una de las características que hacen único al Festival de Otoño es
-            su <strong>compromiso social</strong>. Cada edición busca recaudar
-            fondos para <strong
-              >instituciones de asistencia y proyectos comunitarios</strong
-            > que dependen del apoyo de la sociedad para continuar su labor. Gracias
-            a la generosidad de los asistentes y patrocinadores, se logra impulsar
-            programas que benefician a niños, niñas, adolescentes, mujeres y adultos
-            mayores en situación vulnerable.
-          </p>
-        </div>
-      </div>
-
-      <!-- Previous Impact -->
-      <div class="mb-12">
-        <h3 class="text-2xl font-bold mb-6 text-festival-brown">
-          Impacto Anterior
-        </h3>
-        <p class="text-gray-700 mb-6">
-          En sus ediciones anteriores, el Festival ha demostrado su capacidad de <strong
-            >transformar la celebración en ayuda tangible</strong
-          >.
-        </p>
-
-        <div class="grid md:grid-cols-3 gap-8 mb-8">
-          <div
-            class="text-center p-6 bg-gradient-to-br from-festival-orange to-festival-brown text-white rounded-lg"
-          >
-            <div class="text-4xl font-bold mb-2">35,000+</div>
-            <p class="text-lg">
-              Asistentes reunidos, consolidándose como un evento reconocido en
-              todo el estado
-            </p>
-          </div>
-          <div
-            class="text-center p-6 bg-gradient-to-br from-festival-gold to-yellow-500 text-festival-brown rounded-lg"
-          >
-            <div class="text-4xl font-bold mb-2">$10M+</div>
-            <p class="text-lg">
-              Pesos recaudados, destinados a apoyar diversas instituciones de
-              asistencia social
-            </p>
-          </div>
-          <div
-            class="text-center p-6 bg-gradient-to-br from-festival-green to-green-600 text-white rounded-lg"
-          >
-            <div class="text-4xl font-bold mb-2">50,000+</div>
-            <p class="text-lg">
-              Personas beneficiadas directamente gracias a la colaboración de la
-              comunidad
-            </p>
-          </div>
-        </div>
-
-        <p class="text-gray-700 text-center italic">
-          Cada año buscamos superar estos logros, convencidos de que juntos
-          podemos seguir haciendo historia y creando un impacto positivo que
-          trascienda generaciones.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Community Section -->
-  <section
-    class="py-16 bg-gradient-to-r from-festival-green to-green-600 text-white"
-  >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h3 class="text-3xl font-bold text-center mb-8">
-        UNIDOS POR LA COMUNIDAD
-      </h3>
-
-      <div class="prose prose-lg max-w-none text-center">
-        <p class="text-xl mb-6">
-          El <strong>Festival de Otoño</strong> es el reflejo de lo que podemos lograr
-          cuando trabajamos en conjunto. A lo largo de los años, hemos contado con
-          el valioso respaldo del <strong>Gobierno Municipal</strong>, así como
-          con la generosidad de <strong
-            >empresas locales, negocios familiares y microempresas</strong
-          > que han confiado en este proyecto y se han sumado para hacerlo crecer.
-        </p>
-
-        <p class="text-xl mb-6">
-          Detrás de cada actividad, cada presentación y cada espacio del
-          festival, existe el esfuerzo de una gran red de colaboración. Hoy
-          somos más de <strong>400 voluntarios</strong> que, con entrega y entusiasmo,
-          aportan su tiempo, talento y corazón para que este evento sea una realidad.
-        </p>
-
-        <p class="text-xl">
-          Gracias a esta unión de voluntades, el Festival de Otoño se ha
-          consolidado como un acontecimiento que no solo celebra nuestras
-          tradiciones, sino que también transforma la solidaridad en ayuda
-          concreta para quienes más lo necesitan.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mission, Vision, Objectives -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Mission -->
-        <div
-          class="text-center p-8 bg-gradient-to-br from-festival-orange to-festival-brown text-white rounded-lg"
-        >
-          <h4 class="text-2xl font-bold mb-4">MISIÓN</h4>
-          <p class="text-sm leading-relaxed">
-            Organizar un festival que impulse el talento local con
-            presentaciones artísticas exclusivas, fomente la economía regional
-            mediante la participación de comercios locales, y promueva la
-            diversidad gastronómica, deportiva y cultural. Además, contribuir al
-            desarrollo social recaudando fondos para instituciones necesitadas,
-            celebrando nuestras tradiciones y fortaleciendo el vínculo
-            comunitario.
-          </p>
-        </div>
-
-        <!-- Objective -->
-        <div
-          class="text-center p-8 bg-gradient-to-br from-festival-gold to-yellow-500 text-festival-brown rounded-lg"
-        >
-          <h4 class="text-2xl font-bold mb-4">OBJETIVO</h4>
-          <p class="text-sm leading-relaxed">
-            "El Festival de Otoño, impulsado por la comunidad menonita desde
-            2014, busca generar un impacto positivo en la sociedad mediante la
-            promoción de artistas y productores locales, la celebración de
-            tradiciones y la recaudación de fondos en beneficio de casas
-            hogares, centros de rehabilitación y proyectos comunitarios."
-          </p>
-        </div>
-
-        <!-- Vision -->
-        <div
-          class="text-center p-8 bg-gradient-to-br from-festival-green to-green-600 text-white rounded-lg"
-        >
-          <h4 class="text-2xl font-bold mb-4">VISIÓN</h4>
-          <p class="text-sm leading-relaxed">
-            Consolidar el Festival de Otoño como un símbolo de unidad,
-            creatividad y solidaridad, destacando como el principal evento
-            cultural y social que transforma talentos locales, impulsa el
-            comercio regional y genera un impacto positivo en las instituciones
-            que más lo necesitan.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cultural Section -->
-  <section
-    class="py-16 bg-gradient-to-r from-festival-brown to-festival-orange text-white"
-  >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-4xl font-bold mb-6">
-        EN EL CORAZ<span class="text-festival-gold">Ó</span>N DE CHIHUAHUA LATE
-        TAMBI<span class="text-festival-gold">É</span>N LA CULTURA MENONITA
-      </h2>
-      <p class="text-xl">
-        Transforme su experiencia con nuestro festival que combina música, arte
-        y gastronomía. Nuestras actividades fusionan a la perfección diversión
-        con cultura.
-      </p>
-    </div>
-  </section>
-
-  <!-- Activities Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h3 class="text-4xl font-bold text-center mb-4 text-festival-orange">
-        NUESTRAS ACTIVIDADES
-      </h3>
-      <p class="text-xl text-center mb-12 text-gray-700">
-        TENEMOS PLANEADO UN SIN FIN DE ACTIVIDADES PARA TI
-      </p>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Music and Art -->
-        <div
-          class="bg-gradient-to-br from-purple-100 to-pink-100 p-6 rounded-lg"
-        >
-          <h4 class="text-2xl font-bold mb-4 text-purple-800 flex items-center">
-            <span class="text-3xl mr-2">🎵</span>
-            Música y Arte
-          </h4>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Música en vivo</li>
-            <li>• Cantantes locales</li>
-            <li>• Teatro para toda la familia</li>
-          </ul>
-        </div>
-
-        <!-- Children's Fun -->
-        <div class="bg-gradient-to-br from-blue-100 to-cyan-100 p-6 rounded-lg">
-          <h4 class="text-2xl font-bold mb-4 text-blue-800 flex items-center">
-            <span class="text-3xl mr-2">🎈</span>
-            Diversión Infantil
-          </h4>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Juegos tradicionales</li>
-            <li>• Actividades recreativas</li>
-          </ul>
-        </div>
-
-        <!-- Competitions and Sports -->
-        <div
-          class="bg-gradient-to-br from-green-100 to-emerald-100 p-6 rounded-lg"
-        >
-          <h4 class="text-2xl font-bold mb-4 text-green-800 flex items-center">
-            <span class="text-3xl mr-2">🏆</span>
-            Competencias y Deportes
-          </h4>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Torneos deportivos</li>
-            <li>• Carrera de barriles</li>
-            <li>• Competencia de cortes</li>
-          </ul>
-        </div>
-
-        <!-- Special Contests -->
-        <div
-          class="bg-gradient-to-br from-yellow-100 to-orange-100 p-6 rounded-lg"
-        >
-          <h4 class="text-2xl font-bold mb-4 text-orange-800 flex items-center">
-            <span class="text-3xl mr-2">🏅</span>
-            Concursos Especiales
-          </h4>
-          <ul class="space-y-2 text-gray-700">
-            <li>• La calabaza más grande</li>
-            <li>• La manzana más grande</li>
-            <li>• La mazorca más pesada</li>
-          </ul>
-        </div>
-
-        <!-- Tradition and Exhibitions -->
-        <div
-          class="bg-gradient-to-br from-amber-100 to-yellow-100 p-6 rounded-lg"
-        >
-          <h4 class="text-2xl font-bold mb-4 text-amber-800 flex items-center">
-            <span class="text-3xl mr-2">🏛️</span>
-            Tradición y Exposiciones
-          </h4>
-          <ul class="space-y-2 text-gray-700">
-            <li>• Exposición ganadera</li>
-            <li>• Repostería menonita</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Previous Editions Section -->
-  <section class="py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h3 class="text-4xl font-bold text-center mb-12 text-festival-orange">
-        CONOCE NUESTRAS EDICIONES ANTERIORES
-      </h3>
-
-      <div class="bg-white rounded-lg p-8 shadow-lg">
-        <iframe
-          src="https://www.youtube.com/embed/svydduOIlOs?list=TLGGNT-xMShUTYkyMDA5MjAyNQ"
-          title="Kürbisfest - Festival de la Calabaza - Cuauhtemoc 2022"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          class="w-full h-auto aspect-video"
-          allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
+  {
+    pageData && pageData.sections && pageData.sections.length > 0
+      ? pageData.sections.map((section) =>
+          section.__typename === "ImageSection" ? (
+            <RenderSection section={section} />
+          ) : section.__typename === "GridSection" ? (
+            <GridSection section={section} />
+          ) : section.__typename === "GallerySection" ? (
+            <GallerySection section={section} />
+          ) : section.__typename === "YouTubeSection" ? (
+            <YouTubeSection section={section} />
+          ) : null
+        )
+      : null
+  }
 
   <!-- Contact Section -->
-  <section class="py-16 bg-festival-orange text-white" id="contacto">
+  <section class="py-16 bg-foreground text-background" id="contacto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h3 class="text-4xl font-bold text-center mb-12">Contáctanos</h3>
 
@@ -366,7 +75,7 @@ try {
                   clip-rule="evenodd"></path>
               </svg>
               <p class="text-lg">
-                Kilometro 32, campo 12 B corredor comercial manitoba
+                Kilometro 32, Campo 12 B Corredor Comercial Manitoba
               </p>
             </div>
 
@@ -380,7 +89,12 @@ try {
                   d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
                 ></path>
               </svg>
-              <p class="text-lg">+52 625 10383</p>
+
+              <a
+                href="tel:+526251038346"
+                class="text-lg"
+                rel="noopener noreferrer">+52 (625) 103 8346</a
+              >
             </div>
 
             <div class="flex items-center">
@@ -399,27 +113,15 @@ try {
               <p class="text-lg">festivaldeotonocuauhtemoc@gmail.com</p>
             </div>
           </div>
-
-          <!-- Additional Contact Numbers -->
-          <div
-            class="bg-background text-foreground bg-opacity-20 p-6 mt-4 rounded-lg"
-          >
-            <h5 class="text-xl font-bold mb-4">Otros Números de Contacto</h5>
-            <div class="space-y-2">
-              <p>+52 625 10383</p>
-              <p>+520625 130 8343</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8">
+  <footer class="bg-foreground text-background py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">Made by AI + David Rempel 😉</div>
-      <div class="text-center mt-4">That's why it looks like 💩</div>
+      <div class="text-center">Made by David Rempel</div>
     </div>
   </footer>
 </Layout>

@@ -1,0 +1,24 @@
+---
+import type { YouTubeSection } from "@/types/hygraph";
+
+interface Props {
+  section: YouTubeSection;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="py-12 px-2">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 gap-4">
+      <iframe
+        src={`https://www.youtube.com/embed/${section.videoId}`}
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        class="w-full h-auto aspect-video"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>

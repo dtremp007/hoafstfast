@@ -1,0 +1,26 @@
+---
+import SplitColumn from "./SplitColumn.astro";
+import TwoCards from "./TwoCards.astro";
+import type { ImageSection } from "@/types/hygraph";
+
+export type SectionType = keyof typeof sectionComponents;
+
+interface Props {
+  section: ImageSection;
+}
+
+const { section } = Astro.props;
+
+const sectionComponents = {
+  splitColumn: SplitColumn,
+  twoCards: TwoCards,
+};
+
+const SectionComponent = sectionComponents[section.sectionType];
+---
+
+<SectionComponent
+  image={section.image}
+  title={section.title}
+  description={section.description}
+/>

@@ -1,8 +1,10 @@
 ---
+import type { HygraphImage } from "@/types/hygraph";
+
 interface Props {
   title: string;
   description: string;
-  image: string;
+  image: HygraphImage;
 }
 
 const { title, description, image } = Astro.props;
@@ -21,9 +23,11 @@ const { title, description, image } = Astro.props;
       </div>
       <div class="flex justify-center">
         <img
-          src={image}
+          src={image.url}
           alt={title}
           class="max-w-full h-auto rounded-lg shadow-lg"
+          width={image.width}
+          height={image.height}
         />
       </div>
     </div>
