@@ -1,9 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SplitColumn from "../components/heroes/SplitColumn.astro";
+import { fetchPageData } from "../lib/hygraph";
+import type { Page } from "../types/hygraph";
+import RenderSection from "../components/sections/RenderSection.astro";
+
+// Fetch page data from Hygraph
+let pageData: Page | null = null;
+try {
+  const response = await fetchPageData({ slug: "home" });
+  pageData = response.data.page;
+} catch (error) {
+  console.error('Error fetching page data:', error);
+  // Fallback to default data if Hygraph is not available
+}
 ---
 
-<Layout>
+<Layout
+  title="Festival de Otoño Cuauhtémoc | Herbstfest (Hoafstfast) | Evento cultural"
+  description="Festival de Otoño (Herbstfest / Hoafstfast) en Cuauhtémoc, Chihuahua: música, arte, gastronomía y causa social. Evento cultural organizado por la comunidad menonita."
+>
   <nav class="bg-white">
     <div class="container mx-auto flex justify-between items-center gap-16 p-4">
       <img
@@ -19,11 +34,12 @@ import SplitColumn from "../components/heroes/SplitColumn.astro";
       </div>
     </div>
   </nav>
-  <SplitColumn
-    image="https://festivaldeotonocuauhtemoc1.odoo.com/web/image/1067-c6276b11/IMGL0894.webp"
-    title="FESTIVAL DE OTOÑO CUAUHTÉMOC"
-    description="Unidos por la tradición, inspirados en la solidaridad"
-  />
+  <!-- Dynamic Sections from Hygraph -->
+  {pageData && pageData.sections && pageData.sections.length > 0 ? (
+    pageData.sections.map((section) => (
+      <RenderSection type={section.sectionType} title={section.title} description={section.description} image={section.image.url} />
+    ))
+  ) : null}
 
   <!-- About Festival Section -->
   <section class="py-16 bg-white">

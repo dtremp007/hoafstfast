@@ -20,7 +20,73 @@ const {
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).toString()} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content="/drone-shot-og.webp" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/drone-shot-og.webp" />
+
+    <!-- JSON-LD Organization/Event -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Festival',
+      name: 'Festival de Otoño Cuauhtémoc',
+      alternateName: ['Herbstfest', 'Festival de Otono', 'Hoafstfast'],
+      url: 'https://www.hoafstfast.com',
+      image: ['https://www.hoafstfast.com/drone-shot-og.webp'],
+      description,
+      organizer: {
+        '@type': 'Organization',
+        name: 'Festival de Otoño Cuauhtémoc'
+      },
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      eventStatus: 'https://schema.org/EventScheduled',
+      startDate: '2025-09-26T10:00:00-06:00',
+      endDate: '2025-09-28T22:00:00-06:00',
+      eventSchedule: [
+        {
+          '@type': 'Schedule',
+          startDate: '2025-09-26',
+          startTime: '10:00',
+          endTime: '22:00',
+          scheduleTimezone: 'America/Chihuahua'
+        },
+        {
+          '@type': 'Schedule',
+          startDate: '2025-09-27',
+          startTime: '09:00',
+          endTime: '22:00',
+          scheduleTimezone: 'America/Chihuahua'
+        },
+        {
+          '@type': 'Schedule',
+          startDate: '2025-09-28',
+          startTime: '09:00',
+          endTime: '22:00',
+          scheduleTimezone: 'America/Chihuahua'
+        }
+      ],
+      location: {
+        '@type': 'Place',
+        name: 'Campo 12B Corredor Comercial Manitoba, Chihuahua',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Campo 12B',
+          addressLocality: 'Cuauhtémoc',
+          addressRegion: 'Chihuahua',
+          addressCountry: 'MX'
+        }
+      }
+    })} />
     <title>{title}</title>
   </head>
   <body class="font-sans bg-gradient-to-br from-orange-50 to-amber-50">
