@@ -39,12 +39,25 @@ export interface YouTubeSection {
   videoId: string;
 }
 
+export interface EventItem {
+  id: string;
+  title: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface EventsResponse {
+  data: {
+    events: EventItem[];
+  };
+}
+
 export interface Page {
   title: string;
   sections: Array<ImageSection | GridSection | GallerySection | YouTubeSection>;
 }
 
-export interface HygraphResponse {
+export interface PageResponse {
   data: {
     page: Page;
   };

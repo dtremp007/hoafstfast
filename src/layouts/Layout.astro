@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { buttonVariants } from "@/components/Button.astro";
 
 export interface Props {
   title?: string;
@@ -20,11 +21,17 @@ const {
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />
+    <link
+      rel="canonical"
+      href={new URL(Astro.url.pathname, Astro.site).toString()}
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).toString()} />
+    <meta
+      property="og:url"
+      content={new URL(Astro.url.pathname, Astro.site).toString()}
+    />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/drone-shot-og.webp" />
@@ -36,60 +43,95 @@ const {
     <meta name="twitter:image" content="/drone-shot-og.webp" />
 
     <!-- JSON-LD Organization/Event -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Festival',
-      name: 'Festival de Otoño Cuauhtémoc',
-      alternateName: ['Herbstfest', 'Festival de Otono', 'Hoafstfast'],
-      url: 'https://www.hoafstfast.com',
-      image: ['https://www.hoafstfast.com/drone-shot-og.webp'],
-      description,
-      organizer: {
-        '@type': 'Organization',
-        name: 'Festival de Otoño Cuauhtémoc'
-      },
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      eventStatus: 'https://schema.org/EventScheduled',
-      startDate: '2025-09-26T10:00:00-06:00',
-      endDate: '2025-09-28T22:00:00-06:00',
-      eventSchedule: [
-        {
-          '@type': 'Schedule',
-          startDate: '2025-09-26',
-          startTime: '10:00',
-          endTime: '22:00',
-          scheduleTimezone: 'America/Chihuahua'
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Festival",
+        name: "Festival de Otoño Cuauhtémoc",
+        alternateName: ["Herbstfest", "Festival de Otono", "Hoafstfast"],
+        url: "https://www.hoafstfast.com",
+        image: ["https://www.hoafstfast.com/drone-shot-og.webp"],
+        description,
+        organizer: {
+          "@type": "Organization",
+          name: "Festival de Otoño Cuauhtémoc",
         },
-        {
-          '@type': 'Schedule',
-          startDate: '2025-09-27',
-          startTime: '09:00',
-          endTime: '22:00',
-          scheduleTimezone: 'America/Chihuahua'
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        eventStatus: "https://schema.org/EventScheduled",
+        startDate: "2025-09-26T10:00:00-06:00",
+        endDate: "2025-09-28T22:00:00-06:00",
+        eventSchedule: [
+          {
+            "@type": "Schedule",
+            startDate: "2025-09-26",
+            startTime: "10:00",
+            endTime: "22:00",
+            scheduleTimezone: "America/Chihuahua",
+          },
+          {
+            "@type": "Schedule",
+            startDate: "2025-09-27",
+            startTime: "09:00",
+            endTime: "22:00",
+            scheduleTimezone: "America/Chihuahua",
+          },
+          {
+            "@type": "Schedule",
+            startDate: "2025-09-28",
+            startTime: "09:00",
+            endTime: "22:00",
+            scheduleTimezone: "America/Chihuahua",
+          },
+        ],
+        location: {
+          "@type": "Place",
+          name: "Campo 12B Corredor Comercial Manitoba, Chihuahua",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Campo 12B",
+            addressLocality: "Cuauhtémoc",
+            addressRegion: "Chihuahua",
+            addressCountry: "MX",
+          },
         },
-        {
-          '@type': 'Schedule',
-          startDate: '2025-09-28',
-          startTime: '09:00',
-          endTime: '22:00',
-          scheduleTimezone: 'America/Chihuahua'
-        }
-      ],
-      location: {
-        '@type': 'Place',
-        name: 'Campo 12B Corredor Comercial Manitoba, Chihuahua',
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'Campo 12B',
-          addressLocality: 'Cuauhtémoc',
-          addressRegion: 'Chihuahua',
-          addressCountry: 'MX'
-        }
-      }
-    })} />
+      })}
+    />
     <title>{title}</title>
   </head>
-  <body >
+  <body>
+    <header
+      class="sticky top-0 z-40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b"
+    >
+      <nav>
+        <div
+          class="container mx-auto flex justify-between items-center gap-16 p-4"
+        >
+          <a href="/">
+            <img
+              src="/logo.png"
+              alt="Festival de Otoño Cuauhtémoc"
+              class="h-14 w-14"
+            />
+          </a>
+          <div class="flex items-center gap-2">
+            <a href="/" class={buttonVariants({ variant: "ghost" })}>Inicio</a>
+            <a href="/itinerario" class={buttonVariants({ variant: "ghost" })}
+              >Itinerario</a
+            >
+            <a href="/#contacto" class={buttonVariants({ variant: "default" })}
+              >Contáctanos</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
     <slot />
+    <!-- Footer -->
+    <footer class="bg-foreground text-background py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">Made by David Rempel</div>
+      </div>
+    </footer>
   </body>
 </html>

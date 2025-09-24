@@ -1,10 +1,14 @@
-import type { HygraphResponse, PageQueryVariables } from "../types/hygraph";
+import type {
+  PageResponse,
+  PageQueryVariables,
+  EventsResponse,
+} from "../types/hygraph";
 
 const HYGRAPH_ENDPOINT = import.meta.env.HYGRAPH_ENDPOINT;
 
 export async function fetchPageData(
   variables: PageQueryVariables
-): Promise<HygraphResponse> {
+): Promise<PageResponse> {
   const query = `
 query GetPage($slug: String!) {
   page(where: {slug: $slug}) {
@@ -54,6 +58,8 @@ query GetPage($slug: String!) {
     }
   }
 }
+
+
   `;
 
   const response = await fetch(HYGRAPH_ENDPOINT, {
@@ -72,6 +78,34 @@ query GetPage($slug: String!) {
     throw new Error(message.errors[0].message);
   }
 
-  const data: HygraphResponse = await response.json();
+  const data: PageResponse = await response.json();
+  return data;
+}
+
+export async function fetchEvents(): Promise<EventsResponse> {
+  const query = `
+      query GetEvents {
+        events(locales: [es_MX] first: 100 orderBy: startTime_DESC) {
+          id
+          title
+          startTime
+          endTime
+        }
+      }
+    `;
+
+  const response = await fetch(HYGRAPH_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query }),
+  });
+
+  if (!response.ok) {
+    const message = await response.json();
+    console.error("Error fetching events:", message);
+    throw new Error(message.errors?.[0]?.message || "Failed to fetch events");
+  }
+
+  const data: EventsResponse = await response.json();
   return data;
 }

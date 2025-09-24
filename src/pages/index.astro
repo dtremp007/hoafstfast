@@ -23,18 +23,6 @@ try {
   title="Festival de Otoño Cuauhtémoc | Herbstfest (Hoafstfast)"
   description="Festival de Otoño (Herbstfest / Hoafstfast) en Cuauhtémoc, Chihuahua: música, arte, gastronomía y causa social. Evento cultural organizado por la comunidad menonita."
 >
-  <nav>
-    <div class="container mx-auto flex justify-between items-center gap-16 p-4">
-      <img
-        src="/logo.png"
-        alt="Festival de Otoño Cuauhtémoc"
-        class="h-24 w-24"
-      />
-      <div class="flex items-center space-x-4">
-        <a href="#contacto" class={buttonVariants({ variant: "default" })}>Contáctanos</a>
-      </div>
-    </div>
-  </nav>
   <!-- Dynamic Sections from Hygraph -->
   {
     pageData && pageData.sections && pageData.sections.length > 0
@@ -118,10 +106,5 @@ try {
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-foreground text-background py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">Made by David Rempel</div>
-    </div>
-  </footer>
+
 </Layout>
