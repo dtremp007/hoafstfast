@@ -14,14 +14,7 @@ function groupEventsByDate(events: EventItem[]) {
 
   events.forEach((event) => {
     const date = new Date(event.startTime);
-    // Use Mexico City timezone for date grouping
-    const dateKey = new Intl.DateTimeFormat('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      timeZone: 'America/Mexico_City'
-    }).format(date);
+    const dateKey = date.toDateString(); // e.g., "Mon Oct 14 2024"
 
     if (!grouped.has(dateKey)) {
       grouped.set(dateKey, []);
@@ -52,7 +45,6 @@ function formatDate(dateString: string) {
     weekday: "long",
     month: "long",
     day: "numeric",
-    timeZone: "America/Mexico_City"
   }).format(date);
 }
 
@@ -61,23 +53,15 @@ function groupEventsByHour(dayEvents: EventItem[]) {
   const groups = new Map<number, EventItem[]>();
   dayEvents.forEach((ev) => {
     const d = new Date(ev.startTime);
-    // Convert to Mexico City timezone for hour grouping
-    const localHour = new Intl.DateTimeFormat('en-US', {
-      hour: 'numeric',
-      timeZone: 'America/Mexico_City'
-    }).format(d);
-
-    const localDate = new Intl.DateTimeFormat('en-CA', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      timeZone: 'America/Mexico_City'
-    }).format(d);
-
     const hourStartMs = new Date(
-      `${localDate}T${localHour.padStart(2, '0')}:00:00`
+      d.getFullYear(),
+      d.getMonth(),
+      d.getDate(),
+      d.getHours(),
+      0,
+      0,
+      0
     ).getTime();
-
     if (!groups.has(hourStartMs)) groups.set(hourStartMs, []);
     groups.get(hourStartMs)!.push(ev);
   });
@@ -100,7 +84,6 @@ function formatHour(hourStartMs: number) {
   return new Intl.DateTimeFormat("es-MX", {
     hour: "numeric",
     minute: "2-digit",
-    timeZone: "America/Mexico_City"
   }).format(date);
 }
 ---
