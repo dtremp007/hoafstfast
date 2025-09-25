@@ -2,7 +2,7 @@
 interface Props {
   title: string;
   startTime: string;
-  endTime: string;
+  endTime?: string;
 }
 
 const { title, startTime, endTime } = Astro.props;
@@ -13,8 +13,7 @@ const timeFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: 'America/Chihuahua'
 });
 const start = new Date(startTime);
-const end = new Date(endTime);
-const range = `${timeFormatter.format(start)} - ${timeFormatter.format(end)}`;
+const range = endTime ? `${timeFormatter.format(start)} - ${timeFormatter.format(new Date(endTime))}` : timeFormatter.format(start);
 ---
 
 <div
@@ -27,11 +26,15 @@ const range = `${timeFormatter.format(start)} - ${timeFormatter.format(end)}`;
   >
     <div data-slot="card-title" class="leading-none font-semibold">
       {title}
-    </div><div
-      data-slot="card-description"
-      class="text-muted-foreground text-sm"
-    >
-      {range}
-    </div><div data-slot="card-content" class="px-6"></div>
+    </div>
+    {range && (
+      <div
+        data-slot="card-description"
+        class="text-muted-foreground text-sm"
+      >
+        {range}
+      </div>
+    )}
+    <div data-slot="card-content" class="px-6"></div>
   </div>
 </div>
