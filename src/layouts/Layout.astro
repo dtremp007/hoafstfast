@@ -106,7 +106,7 @@ const {
     >
       <nav>
         <div
-          class="container mx-auto flex justify-between items-center gap-16 p-4"
+          class="container mx-auto flex justify-between items-center p-4"
         >
           <a href="/">
             <img
@@ -115,12 +115,12 @@ const {
               class="h-14 w-14"
             />
           </a>
-          <div class="flex items-center gap-2">
-            <a href="https://maps.app.goo.gl/uaSvSvZvuJGszM2VA" target="_blank" rel="noopener noreferrer" class={cn(buttonVariants({ variant: "ghost" }), "px-3")}>Ubicación</a>
-            <a href="/itinerario" class={cn(buttonVariants({ variant: "ghost" }), "px-3")}
+          <div class="flex items-center sm:gap-2">
+            <a href="https://maps.app.goo.gl/uaSvSvZvuJGszM2VA" target="_blank" rel="noopener noreferrer" class={cn(buttonVariants({ variant: "ghost" }), "px-2 sm:px-3")}>Ubicación</a>
+            <a href="/itinerario" class={cn(buttonVariants({ variant: "ghost" }), "px-2 sm:px-3")}
               >Itinerario</a
             >
-            <a href="/#contacto" class={buttonVariants({ variant: "default" })}
+            <a href="/#contacto" class={cn(buttonVariants({ variant: "default" }), "px-3 sm:px-3")}
               >Contáctanos</a
             >
           </div>
