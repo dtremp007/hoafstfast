@@ -15,12 +15,18 @@ function groupEventsByDate(events: EventItem[]) {
   events.forEach((event) => {
     const date = new Date(event.startTime);
     // Create a timezone-aware date key using America/Chihuahua timezone
-    const dateKey = new Intl.DateTimeFormat("en-US", {
+    // Use a more explicit approach to get the date components in the target timezone
+    const formatter = new Intl.DateTimeFormat("en-CA", {
       timeZone: "America/Chihuahua",
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-    }).format(date);
+    });
+    const parts = formatter.formatToParts(date);
+    const year = parts.find(part => part.type === 'year')?.value;
+    const month = parts.find(part => part.type === 'month')?.value;
+    const day = parts.find(part => part.type === 'day')?.value;
+    const dateKey = `${month}/${day}/${year}`;
 
     if (!grouped.has(dateKey)) {
       grouped.set(dateKey, []);
@@ -54,8 +60,9 @@ const sortedDates = Array.from(groupedEvents.keys()).sort(
 // Format date for display
 function formatDate(dateKey: string) {
   // Convert MM/DD/YYYY format back to a proper date
+  // Create the date at noon UTC to avoid timezone edge cases
   const [month, day, year] = dateKey.split('/');
-  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  const date = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0));
   return new Intl.DateTimeFormat("es-MX", {
     weekday: "long",
     month: "long",
