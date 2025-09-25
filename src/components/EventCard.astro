@@ -22,7 +22,7 @@ const range = endTime ? `${timeFormatter.format(start)} - ${timeFormatter.format
 >
   <div
     data-slot="card-header"
-    class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6"
+    class="@container/card-header h-full flex flex-col gap-1.5 justify-between px-6"
   >
     <div data-slot="card-title" class="leading-none font-semibold">
       {title}
@@ -35,6 +35,5 @@ const range = endTime ? `${timeFormatter.format(start)} - ${timeFormatter.format
         {range}
       </div>
     )}
-    <div data-slot="card-content" class="px-6"></div>
   </div>
 </div>
