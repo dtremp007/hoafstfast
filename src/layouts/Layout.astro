@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { buttonVariants } from "@/components/Button.astro";
+import { cn } from "@/lib/utils";
 
 export interface Props {
   title?: string;
@@ -101,7 +102,7 @@ const {
   </head>
   <body>
     <header
-      class="sticky top-0 z-40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b"
+      class="sticky top-0 z-40 bg-background border-b"
     >
       <nav>
         <div
@@ -115,8 +116,8 @@ const {
             />
           </a>
           <div class="flex items-center gap-2">
-            <a href="/" class={buttonVariants({ variant: "ghost" })}>Inicio</a>
-            <a href="/itinerario" class={buttonVariants({ variant: "ghost" })}
+            <a href="https://maps.app.goo.gl/uaSvSvZvuJGszM2VA" target="_blank" rel="noopener noreferrer" class={cn(buttonVariants({ variant: "ghost" }), "px-3")}>Ubicación</a>
+            <a href="/itinerario" class={cn(buttonVariants({ variant: "ghost" }), "px-3")}
               >Itinerario</a
             >
             <a href="/#contacto" class={buttonVariants({ variant: "default" })}

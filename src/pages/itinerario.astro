@@ -47,6 +47,45 @@ function formatDate(dateString: string) {
     day: "numeric",
   }).format(date);
 }
+
+// Group a single day's events by starting local hour
+function groupEventsByHour(dayEvents: EventItem[]) {
+  const groups = new Map<number, EventItem[]>();
+  dayEvents.forEach((ev) => {
+    const d = new Date(ev.startTime);
+    const hourStartMs = new Date(
+      d.getFullYear(),
+      d.getMonth(),
+      d.getDate(),
+      d.getHours(),
+      0,
+      0,
+      0
+    ).getTime();
+    if (!groups.has(hourStartMs)) groups.set(hourStartMs, []);
+    groups.get(hourStartMs)!.push(ev);
+  });
+
+  // Sort events within each hour by start time
+  groups.forEach((list) =>
+    list.sort(
+      (a, b) =>
+        new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
+    )
+  );
+
+  // Return entries sorted by hour ascending
+  return Array.from(groups.entries()).sort((a, b) => a[0] - b[0]);
+}
+
+// Spanish hour label for subheaders
+function formatHour(hourStartMs: number) {
+  const date = new Date(hourStartMs);
+  return new Intl.DateTimeFormat("es-MX", {
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(date);
+}
 ---
 
 <Layout title="Itinerario - Festival de Otoño Cuauhtémoc">
@@ -68,18 +107,30 @@ function formatDate(dateString: string) {
                     </h2>
                     <div class="w-24 h-1 bg-primary mx-auto rounded-full" />
                   </div>
-                  <div
-                    class={cn(
-                      "grid gap-6 justify-center",
-                      dayEvents.length > 1 && "md:grid-cols-2 lg:grid-cols-3"
-                    )}
-                  >
-                    {dayEvents.map((ev) => (
-                      <EventCard
-                        title={ev.title}
-                        startTime={ev.startTime}
-                        endTime={ev.endTime}
-                      />
+                  <div class="space-y-10">
+                    {groupEventsByHour(dayEvents).map(([hourKey, hourEvents]) => (
+                      <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                          <div class="text-base font-medium text-muted-foreground">
+                            {formatHour(hourKey)}
+                          </div>
+                          <div class="flex-1 h-px bg-border" />
+                        </div>
+                        <div
+                          class={cn(
+                            "grid gap-6",
+                            hourEvents.length > 1 && "md:grid-cols-2 lg:grid-cols-3"
+                          )}
+                        >
+                          {hourEvents.map((ev) => (
+                            <EventCard
+                              title={ev.title}
+                              startTime={ev.startTime}
+                              endTime={ev.endTime}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>

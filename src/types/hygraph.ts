@@ -7,12 +7,18 @@ export interface HygraphImage {
   height: number;
 }
 
+export interface HygraphButton {
+  text: string;
+  url: string;
+}
+
 export interface ImageSection {
   __typename: "ImageSection";
   title: string;
   description: string;
   image: HygraphImage;
   sectionType: SectionType;
+  buttons: HygraphButton[];
 }
 
 export interface ContentColumn {

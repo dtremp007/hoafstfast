@@ -1,13 +1,15 @@
 ---
-import type { HygraphImage } from "@/types/hygraph";
+import type { HygraphImage, HygraphButton } from "@/types/hygraph";
+import { buttonVariants } from "@/components/Button.astro";
 
 interface Props {
   title: string;
   description: string;
   image: HygraphImage;
+  button: HygraphButton;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, button } = Astro.props;
 ---
 
 <section class="py-16 bg-white">
@@ -20,6 +22,9 @@ const { title, description, image } = Astro.props;
         <p class="text-lg text-gray-700 leading-relaxed">
           {description}
         </p>
+        {button && (
+          <a href={button.url} class={buttonVariants({ variant: "default" })}>{button.text}</a>
+        )}
       </div>
       <div class="flex justify-center">
         <img

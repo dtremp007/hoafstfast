@@ -25,6 +25,12 @@ query GetPage($slug: String!) {
           url
         }
         sectionType
+        buttons {
+          ... on Button {
+            text
+            url
+          }
+        }
       }
       ... on GridSection {
         __typename
