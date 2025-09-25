@@ -6,10 +6,11 @@ interface Props {
 }
 
 const { title, startTime, endTime } = Astro.props;
-const timeFormatter = new Intl.DateTimeFormat('en-US', {
+const timeFormatter = new Intl.DateTimeFormat('es-MX', {
   hour: 'numeric',
   minute: '2-digit',
-  hour12: true
+  hour12: true,
+  timeZone: 'America/Mexico_City'
 });
 const start = new Date(startTime);
 const end = new Date(endTime);
