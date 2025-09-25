@@ -14,7 +14,13 @@ function groupEventsByDate(events: EventItem[]) {
 
   events.forEach((event) => {
     const date = new Date(event.startTime);
-    const dateKey = date.toDateString(); // e.g., "Mon Oct 14 2024"
+    // Create a timezone-aware date key using America/Chihuahua timezone
+    const dateKey = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chihuahua",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(date);
 
     if (!grouped.has(dateKey)) {
       grouped.set(dateKey, []);
@@ -35,16 +41,26 @@ function groupEventsByDate(events: EventItem[]) {
 
 const groupedEvents = groupEventsByDate(events || []);
 const sortedDates = Array.from(groupedEvents.keys()).sort(
-  (a, b) => new Date(a).getTime() - new Date(b).getTime()
+  (a, b) => {
+    // Parse MM/DD/YYYY format for comparison
+    const [monthA, dayA, yearA] = a.split('/').map(Number);
+    const [monthB, dayB, yearB] = b.split('/').map(Number);
+    const dateA = new Date(yearA, monthA - 1, dayA);
+    const dateB = new Date(yearB, monthB - 1, dayB);
+    return dateA.getTime() - dateB.getTime();
+  }
 );
 
 // Format date for display
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
+function formatDate(dateKey: string) {
+  // Convert MM/DD/YYYY format back to a proper date
+  const [month, day, year] = dateKey.split('/');
+  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
   return new Intl.DateTimeFormat("es-MX", {
     weekday: "long",
     month: "long",
     day: "numeric",
+    timeZone: "America/Chihuahua",
   }).format(date);
 }
 
@@ -84,6 +100,7 @@ function formatHour(hourStartMs: number) {
   return new Intl.DateTimeFormat("es-MX", {
     hour: "numeric",
     minute: "2-digit",
+    timeZone: "America/Chihuahua",
   }).format(date);
 }
 ---
