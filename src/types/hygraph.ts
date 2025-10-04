@@ -72,3 +72,44 @@ export interface PageResponse {
 export interface PageQueryVariables {
   slug: string;
 }
+
+// Feedback types
+export enum MessageType {
+  TEXT = "TEXT",
+  AUDIO = "AUDIO"
+}
+
+export interface FeedbackInput {
+  messageType: MessageType;
+  textContent?: string;
+  audioFile?: File;
+  language?: string;
+  source: string;
+}
+
+export interface Feedback {
+  id: string;
+  createdAt: string;
+  messageType: MessageType;
+  textContent?: string;
+  audioFile?: {
+    url: string;
+  };
+  language?: string;
+  source: string;
+}
+
+export interface FeedbackResponse {
+  data: {
+    createFeedback: Feedback;
+  };
+}
+
+// Local chat message types
+export interface ChatMessage {
+  id: string;
+  type: "text" | "audio" | "system";
+  content: string; // text content or audio URL
+  timestamp: number;
+  isUser: boolean;
+}

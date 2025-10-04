@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+import { buttonVariants } from "@/components/Button.astro";
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Festival de Otoño Cuauhtémoc",
+  description = "Unidos por la tradición, inspirados en la solidaridad",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link
+      rel="canonical"
+      href={new URL(Astro.url.pathname, Astro.site).toString()}
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content={new URL(Astro.url.pathname, Astro.site).toString()}
+    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/drone-shot-og.webp" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/drone-shot-og.webp" />
+    <title>{title}</title>
+  </head>
+  <body class="overflow-hidden">
+    <header class="sticky top-0 z-40 bg-background border-b">
+      <nav>
+        <div class="container mx-auto flex justify-between items-center p-4">
+          <a href="/">
+            <img
+              src="/logo.png"
+              alt="Festival de Otoño Cuauhtémoc"
+              class="h-14 w-14"
+            />
+          </a>
+          <div class="flex items-center sm:gap-2">
+            <a
+              href="https://maps.app.goo.gl/uaSvSvZvuJGszM2VA"
+              target="_blank"
+              rel="noopener noreferrer"
+              class={cn(buttonVariants({ variant: "ghost" }), "px-3")}
+              >Ubicación</a
+            >
+            <a
+              href="/itinerario"
+              class={cn(buttonVariants({ variant: "ghost" }), "px-3")}
+              >Itinerario</a
+            >
+            <a href="/#contacto" class={buttonVariants({ variant: "default" })}
+              >Contáctanos</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    <slot />
+    <!-- Footer -->
+  </body>
+</html>
