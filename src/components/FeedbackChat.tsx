@@ -29,7 +29,9 @@ export default function FeedbackChat() {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [audioPreviewUrl, setAudioPreviewUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [uploadingMessageId, setUploadingMessageId] = useState<string | null>(null);
+  const [uploadingMessageId, setUploadingMessageId] = useState<string | null>(
+    null
+  );
   const [error, setError] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -50,7 +52,9 @@ export default function FeedbackChat() {
           }
           return true;
         });
-        setMessages(validMessages.length > 0 ? validMessages : [WELCOME_MESSAGE]);
+        setMessages(
+          validMessages.length > 0 ? validMessages : [WELCOME_MESSAGE]
+        );
       } catch (e) {
         console.error("Error parsing chat history:", e);
         setMessages([WELCOME_MESSAGE]);
@@ -108,15 +112,16 @@ export default function FeedbackChat() {
     } catch (err) {
       console.error("Error submitting feedback:", err);
       setError(
-        "No se pudo enviar tu opinión. Por favor intenta de nuevo."
+        err instanceof Error
+          ? err.message
+          : "No se pudo enviar tu opinión. Por favor intenta de nuevo."
       );
       setMessages((prev) => [
         ...prev,
         {
           id: `error-${Date.now()}`,
           type: "system",
-          content:
-            "No se pudo enviar tu opinión. Por favor intenta de nuevo.",
+          content: "No se pudo enviar tu opinión. Por favor intenta de nuevo.",
           timestamp: Date.now(),
           isUser: false,
         },
@@ -156,7 +161,7 @@ export default function FeedbackChat() {
     } catch (err) {
       console.error("Error starting recording:", err);
       setError(
-        "No se pudo acceder al micrófono. Por favor verifica los permisos."
+        err instanceof Error ? err.message : "No se pudo acceder al micrófono. Por favor verifica los permisos."
       );
     }
   };
@@ -257,16 +262,13 @@ export default function FeedbackChat() {
       setUploadingMessageId(null);
     } catch (err) {
       console.error("Error submitting audio:", err);
-      setError(
-        "No se pudo enviar tu audio. Por favor intenta de nuevo."
-      );
+      setError("No se pudo enviar tu audio. Por favor intenta de nuevo.");
       setMessages((prev) => [
         ...prev,
         {
           id: `error-${Date.now()}`,
           type: "system",
-          content:
-            "No se pudo enviar tu audio. Por favor intenta de nuevo.",
+          content: "No se pudo enviar tu audio. Por favor intenta de nuevo.",
           timestamp: Date.now(),
           isUser: false,
         },
@@ -285,7 +287,7 @@ export default function FeedbackChat() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-88px)] max-h-screen overflow-auto bg-[#0d1418]">
+    <div className="flex flex-col h-[calc(100svh-88px)] overflow-auto bg-[#0d1418]">
       {/* Chat messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map((msg) => (
