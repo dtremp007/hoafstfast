@@ -131,13 +131,35 @@ export default function FeedbackChat() {
     }
   };
 
+  // Get supported audio MIME type for recording
+  const getSupportedMimeType = () => {
+    const types = [
+      "audio/webm",
+      "audio/webm;codecs=opus",
+      "audio/mp4",
+      "audio/mpeg",
+      "audio/ogg;codecs=opus",
+    ];
+
+    for (const type of types) {
+      if (MediaRecorder.isTypeSupported(type)) {
+        return type;
+      }
+    }
+
+    return ""; // Use default
+  };
+
   // Start recording
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: "audio/webm",
-      });
+
+      const mimeType = getSupportedMimeType();
+      const options = mimeType ? { mimeType } : undefined;
+
+      const mediaRecorder = new MediaRecorder(stream, options);
+      const recordedMimeType = mediaRecorder.mimeType;
 
       audioChunksRef.current = [];
 
@@ -148,7 +170,7 @@ export default function FeedbackChat() {
       };
 
       mediaRecorder.onstop = () => {
-        const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+        const blob = new Blob(audioChunksRef.current, { type: recordedMimeType });
         setAudioBlob(blob);
         setAudioPreviewUrl(URL.createObjectURL(blob));
         stream.getTracks().forEach((track) => track.stop());
@@ -158,10 +180,24 @@ export default function FeedbackChat() {
       mediaRecorder.start();
       setIsRecording(true);
       setRecordingTime(0);
+
+      // Start timer
+      recordingIntervalRef.current = setInterval(() => {
+        setRecordingTime((prev) => {
+          if (prev >= 60) {
+            // Auto-stop after 1 minute
+            stopRecording();
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 1000);
     } catch (err) {
       console.error("Error starting recording:", err);
       setError(
-        err instanceof Error ? err.message : "No se pudo acceder al micrófono. Por favor verifica los permisos."
+        err instanceof Error
+          ? err.message
+          : "No se pudo acceder al micrófono. Por favor verifica los permisos."
       );
     }
   };
@@ -218,10 +254,25 @@ export default function FeedbackChat() {
     setError(null);
 
     try {
+      // Determine file extension based on MIME type
+      const getFileExtension = (mimeType: string) => {
+        if (mimeType.includes("webm")) return "webm";
+        if (mimeType.includes("mp4")) return "mp4";
+        if (mimeType.includes("mpeg")) return "mp3";
+        if (mimeType.includes("ogg")) return "ogg";
+        return "webm"; // fallback
+      };
+
+      const extension = getFileExtension(audioBlob.type);
+
       // Convert Blob to File for form submission
-      const audioFile = new File([audioBlob], `feedback-${Date.now()}.webm`, {
-        type: audioBlob.type,
-      });
+      const audioFile = new File(
+        [audioBlob],
+        `feedback-${Date.now()}.${extension}`,
+        {
+          type: audioBlob.type,
+        }
+      );
 
       // Create FormData for file upload
       const formData = new FormData();

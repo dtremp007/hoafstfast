@@ -205,12 +205,24 @@ To test the feedback system:
 - Microphone permissions for audio feedback
 - localStorage enabled
 
+### Cross-Browser Audio Support
+
+The feedback system automatically detects and uses the best supported audio format for each browser:
+
+- **Chrome/Edge**: `audio/webm` (Opus codec)
+- **Firefox**: `audio/webm` or `audio/ogg`
+- **Safari/iOS**: `audio/mp4` or `audio/mpeg`
+
+The system tries formats in order of preference and uses the first supported format, ensuring audio recording works across all major browsers and mobile devices.
+
 ## Troubleshooting
 
 ### Audio not recording
 - Check browser console for permission errors
 - Ensure microphone permissions are granted
 - Test in a secure context (https:// or localhost)
+- On iOS: Make sure you're using Safari (Chrome iOS uses Safari's engine)
+- Check if MediaRecorder API is supported in your browser
 
 ### Submissions not saving to HyGraph
 - Verify `HYGRAPH_ENDPOINT` environment variable is set correctly
