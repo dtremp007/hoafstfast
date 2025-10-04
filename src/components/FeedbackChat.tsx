@@ -153,18 +153,6 @@ export default function FeedbackChat() {
       mediaRecorder.start();
       setIsRecording(true);
       setRecordingTime(0);
-
-      // Start timer
-      recordingIntervalRef.current = setInterval(() => {
-        setRecordingTime((prev) => {
-          if (prev >= 60) {
-            // Auto-stop after 1 minute
-            stopRecording();
-            return prev;
-          }
-          return prev + 1;
-        });
-      }, 1000);
     } catch (err) {
       console.error("Error starting recording:", err);
       setError(
@@ -297,7 +285,7 @@ export default function FeedbackChat() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-88px)] max-h-screen bg-[#0d1418]">
+    <div className="flex flex-col h-[calc(100vh-88px)] max-h-screen overflow-auto bg-[#0d1418]">
       {/* Chat messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map((msg) => (

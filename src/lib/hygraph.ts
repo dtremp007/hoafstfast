@@ -283,7 +283,7 @@ export async function submitAudioFeedback(
   const assetId = await uploadAudioFile(audioBlob);
 
   // Wait for asset to be ready
-  await wait(1000);
+  await wait(2000);
 
   await publishAsset(assetId);
 
