@@ -5,12 +5,10 @@ import type {
   FeedbackResponse,
   MessageType,
 } from "../types/hygraph";
-
-// Use import.meta.env for server-side env variables
-// These are only available on the server, not exposed to client
-const HYGRAPH_ENDPOINT = import.meta.env.HYGRAPH_ENDPOINT;
-const HYGRAPH_PERMANENT_AUTH_TOKEN = import.meta.env
-  .HYGRAPH_PERMANENT_AUTH_TOKEN;
+import {
+  HYGRAPH_ENDPOINT,
+  HYGRAPH_PERMANENT_AUTH_TOKEN,
+} from "astro:env/server";
 
 export async function fetchPageData(
   variables: PageQueryVariables
